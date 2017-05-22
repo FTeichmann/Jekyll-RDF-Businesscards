@@ -12,31 +12,66 @@ rdf_prefix_path: persons.pref
                         <h4 class="card-title">{{ page.rdf | rdf_property: 'foaf:name' }}</h4>
                         <table class="table table-bordered table-hover">
                             <tbody>
+                                {% capture query %}
+                                SELECT ?x WHERE{<{{page.rdf}}> foaf:title ?x .}
+                                {% endcapture %}
+                                {% assign resultset = page.rdf | sparql_query: query %}
+                                {% for result in resultset %}
                                 <tr>
                                     <td>Title</td>
-                                    <td>{{ page.rdf | rdf_property: 'foaf:title' }}</td>
+                                    <td>{{ result.x }}</td>
                                 </tr>
+                                {% endfor %}
+                                {% capture query %}
+                                SELECT ?x WHERE{<{{page.rdf}}> foaf:firstName ?x .}
+                                {% endcapture %}
+                                {% assign resultset = page.rdf | sparql_query: query %}
+                                {% for result in resultset %}
                                 <tr>
                                     <td>First Name</td>
-                                    <td>{{ page.rdf | rdf_property: 'foaf:firstName' }}</td>
+                                    <td>{{ result.x }}</td>
                                 </tr>
+                                {% endfor %}
+                                {% capture query %}
+                                SELECT ?x WHERE{<{{page.rdf}}> foaf:familyName ?x .}
+                                {% endcapture %}
+                                {% assign resultset = page.rdf | sparql_query: query %}
+                                {% for result in resultset %}
                                 <tr>
                                     <td>Family Name</td>
-                                    <td>{{ page.rdf | rdf_property: 'foaf:familyName' }}</td>
+                                    <td>{{ result.x }}</td>
                                 </tr>
+                                {% endfor %}
+                                {% capture query %}
+                                SELECT ?x WHERE{<{{page.rdf}}> foaf:phone ?x .}
+                                {% endcapture %}
+                                {% assign resultset = page.rdf | sparql_query: query %}
+                                {% for result in resultset %}
                                 <tr>
-                                    <td>Phone</td>
-                                    <!-- <td><a href="tel:0341-12345">0341-12345</a></td> -->
-                                    <td>{{ page.rdf | rdf_property: 'foaf:phone' }}</td>
+                                <td>Phone</td>
+                                <td><a href="{{ result.x }}">{{ result.x }}</td>
                                 </tr>
+                                {% endfor %}
+                                {% capture query %}
+                                SELECT ?x WHERE{<{{page.rdf}}> foaf:mbox ?x .}
+                                {% endcapture %}
+                                {% assign resultset = page.rdf | sparql_query: query %}
+                                {% for result in resultset %}
                                 <tr>
-                                    <td>Email</td>
-                                    <td><a href="mailto:LarryOctopus@aksw.org">LarryOctopus@aksw.org</a></td>
+                                <td>Email</td>
+                                <td><a href="{{ result.x }}">{{ result.x }}</td>
                                 </tr>
+                                {% endfor %}
+                                {% capture query %}
+                                SELECT ?x WHERE{<{{page.rdf}}> ex:room ?x .}
+                                {% endcapture %}
+                                {% assign resultset = page.rdf | sparql_query: query %}
+                                {% for result in resultset %}
                                 <tr>
                                     <td>Room</td>
-                                    <td>{{ page.rdf | rdf_property: 'ex:room' }}</td>
+                                    <td>{{ result.x }}</td>
                                 </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
