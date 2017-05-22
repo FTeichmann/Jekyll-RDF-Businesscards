@@ -1,4 +1,4 @@
-This is a small sample project to showcase a Linked Data driven Businesscard.
+This is a small sample project to showcase a Linked Data driven businesscard.
 
 ## Dependencies
 
@@ -14,5 +14,6 @@ gem install jekyll-rdf
 
 ## Deploy
 
-```jekyll serve
+```
+jekyll serve
 ```
