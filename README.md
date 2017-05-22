@@ -14,5 +14,6 @@ gem install jekyll-rdf
 
 ## Deploy
 
-```jekyll serve
+```
+jekyll serve
 ```
