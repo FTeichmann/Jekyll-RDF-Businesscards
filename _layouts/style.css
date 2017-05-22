@@ -1,0 +1,8 @@
+/*Business Card Css */
+.customCard {
+  border: 1px solid #cccccc;
+  background: lightblue;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,52 @@
+---
+rdf_prefix_path: persons.pref
+---
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<section>
+    <div class="container" style="background: lightblue; padding: 10px;">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card-block">
+                        <h4 class="card-title">{{ page.rdf | rdf_property: 'foaf:name' }}</h4>
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>Title</td>
+                                    <td>{{ page.rdf | rdf_property: 'foaf:title' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td>{{ page.rdf | rdf_property: 'foaf:firstName' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Family Name</td>
+                                    <td>{{ page.rdf | rdf_property: 'foaf:familyName' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone</td>
+                                    <!-- <td><a href="tel:0341-12345">0341-12345</a></td> -->
+                                    <td>{{ page.rdf | rdf_property: 'foaf:phone' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><a href="mailto:LarryOctopus@aksw.org">LarryOctopus@aksw.org</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Room</td>
+                                    <td>{{ page.rdf | rdf_property: 'ex:room' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-block">
+                        <img class="rounded float-left img-fluid" src="{{ page.rdf | rdf_property: 'foaf:depiction'}}" alt="Photo" style="padding: 0px; height: auto; max-width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
