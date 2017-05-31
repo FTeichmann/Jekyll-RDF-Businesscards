@@ -3,11 +3,21 @@
 @prefix ex: <http://example.org/> .
 
 ex:LarryOctopus a foaf:Person;
-                foaf:name "Larry Octopus" ;
-                foaf:familyName "van Octopus" ;
-                foaf:firstName "Larry" ;
-                foaf:title "Sir" ;
-                ex:room "A-quarium" ;
-                foaf:depiction <https://images.freecreatives.com/wp-content/uploads/2016/02/Download-Optopus-Logo-For-Free.jpeg> ;
-                foaf:mbox <mailto:LarryOctopus@aksw.org> ;
-                foaf:phone <tel:+49-341-123456789> .
+    foaf:name "Larry Octopus" ;
+    foaf:familyName "van Octopus" ;
+    foaf:firstName "Larry" ;
+    foaf:title "Sir" ;
+    ex:room "A-quarium" ;
+    foaf:depiction <https://images.freecreatives.com/wp-content/uploads/2016/02/Download-Optopus-Logo-For-Free.jpeg> ;
+    foaf:mbox <mailto:LarryOctopus@aksw.org> ;
+    foaf:phone <tel:+49-341-123456789> .
+
+ex:CorneliusCrab a foaf:Person;
+    foaf:name "Cornelius Crab" ;
+    foaf:familyName "Crab" ;
+    foaf:firstName "Cornelius" ;
+    foaf:title "Dr." ;
+    ex:room "A-quarium" ;
+    foaf:depiction <http://clipartix.com/wp-content/uploads/2016/04/Crab-clip-art-5-clipartwiz.png> ;
+    foaf:mbox <mailto:Cornelius@aksw.org> ;
+    foaf:phone <tel:+49-341-123456789> .
