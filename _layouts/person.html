@@ -1,10 +1,34 @@
 ---
 rdf_prefix_path: persons.pref
 ---
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<section>
-    <div class="container" style="background: lightblue; padding: 10px;">
+<link rel="stylesheet" href="/css/style.css">
+<title>Meet the Team</title>
+</head>
+<body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <img src="http://aksw.org/extensions/site/sites//local/images/logo-aksw.png" width="auto" height="auto" alt="AKSW">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Team</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
         <div class="card">
             <div class="row">
                 <div class="col-md-8">
@@ -48,8 +72,8 @@ rdf_prefix_path: persons.pref
                                 {% assign resultset = page.rdf | sparql_query: query %}
                                 {% for result in resultset %}
                                 <tr>
-                                <td>Phone</td>
-                                <td><a href="{{ result.x }}">{{ result.x }}</td>
+                                    <td>Phone</td>
+                                    <td><a href="{{ result.x }}">{{ result.x }}</td>
                                 </tr>
                                 {% endfor %}
                                 {% capture query %}
@@ -58,8 +82,8 @@ rdf_prefix_path: persons.pref
                                 {% assign resultset = page.rdf | sparql_query: query %}
                                 {% for result in resultset %}
                                 <tr>
-                                <td>Email</td>
-                                <td><a href="{{ result.x }}">{{ result.x }}</td>
+                                    <td>Email</td>
+                                    <td><a href="{{ result.x }}">{{ result.x }}</td>
                                 </tr>
                                 {% endfor %}
                                 {% capture query %}
@@ -82,6 +106,10 @@ rdf_prefix_path: persons.pref
                     </div>
                 </div>
             </div>
-        <div>
+        </div>
     </div>
-</section>
+    <footer class="container-fluid row text-center">
+        <p>Fantastic Footer</p>
+    </footer>
+</body>
+</html>

@@ -1,48 +1,62 @@
 <!DOCTYPE html>
 <html>
+<head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="css/style.css">
-<title>meet our team</title>
-
+<title>Meet the Team</title>
+</head>
 <body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <img src="http://aksw.org/extensions/site/sites//local/images/logo-aksw.png" width="auto" height="auto" alt="AKSW">
 
-
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Team</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <div class="container">
         <div class="heading-title text-center">
             <h3 class="text-uppercase">Meet the Team</h3>
-            <p class="p-top-30 half-txt">Let's meet our fantastic team!</p>
+            <p class="p-top-30 half-txt">Let's meet our team!</p>
         </div>
         <div class="row">
-            {% for page in site.pages %}
-            {% if page.rdf.iri %}
-            <div class="col-md-4">
-                <div class="team-member">
-                    <div class="embed-responsive">
-                        <div class="team-img">
-                            <img src="{{ page.rdf | rdf_property: 'foaf:depiction'}}" alt="team member" class="rounded float-left img-fluid" style="height: auto; max-width: 100%;">
-                        </div>
-                        <div class="team-hover">
-                            <div class="desk">
-                                <h4>Hello World</h4>
-                                <p>I love to introduce myself as a hardcore Web Designer.</p>
-                            </div>
-                            <div class="s-link">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-google-plus"></i></a>
-                            </div>
-                        </div>
+        {% for page in site.pages %}
+        {% if page.rdf.iri %}
+            <div class="col-md-4 team-member">
+                <div class="embed-responsive">
+                    <div class="team-img">
+                        <img src="{{ page.rdf | rdf_property: 'foaf:depiction'}}" alt="team member" class="img-fluid" style="max-height:100%; max-width: auto; object-fit: contain">
                     </div>
-                    <div class="team-title">
-                        <h5><a href="{{ page.url }}">{{ page.rdf | rdf_property: 'foaf:name' }}</a></h5>
-                        <span>HR Manager</span>
+                    <div class="team-hover">
+                        <div class="desk">
+                            <h4>{{ page.rdf | rdf_property: 'foaf:title' }} {{ page.rdf | rdf_property: 'foaf:firstName'}} {{ page.rdf | rdf_property: 'foaf:familyName'}}</h4>
+                            <p><a href="{{ page.rdf | rdf_property: 'foaf:phone' }}">{{ page.rdf | rdf_property: 'foaf:phone' }}</a></p>
+                            <p><a href="{{ page.rdf | rdf_property: 'foaf:mbox' }}">{{ page.rdf | rdf_property: 'foaf:mbox' }}</p>
+                        </div>
                     </div>
                 </div>
+                    <div class="team-title">
+                        <h5><a href="{{ page.url }}">{{ page.rdf | rdf_property: 'foaf:name' }}</a></h5>
+                        <span>{{ page.rdf | rdf_property: 'foaf:status' }}</span>
+                </div>
             </div>
-            {% endif %}
-            {% endfor %}
-            <div>
-            </body>
-            </html>
+        {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+    <footer class="container-fluid row text-center">
+      <p>Fantastic Footer</p>
+    </footer>
+</body>
+</html>

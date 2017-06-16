@@ -6,9 +6,19 @@ body {
     color: #323232;
     font-size: 15px;
     font-weight: 400;
+    background-color: #f5f5f5;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
+}
+.navbar {
+  background-color: #e0e0e0;
+  margin-bottom: 10px;
+  border-radius: 0;
+}
+footer {
+  background-color: #e0e0e0;
+  padding: 25px;
 }
 .heading-title {
     margin-bottom: 100px;

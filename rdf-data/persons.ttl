@@ -2,14 +2,15 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix ex: <http://example.org/> .
 
-ex:LarryOctopus a foaf:Person;
-    foaf:name "Larry Octopus" ;
+ex:OliverOctopus a foaf:Person;
+    foaf:name "Oliver Octopus" ;
     foaf:familyName "van Octopus" ;
-    foaf:firstName "Larry" ;
+    foaf:firstName "Oliver" ;
     foaf:title "Sir" ;
+    foaf:status "C.E.O." ;
     ex:room "A-quarium" ;
     foaf:depiction <https://images.freecreatives.com/wp-content/uploads/2016/02/Download-Optopus-Logo-For-Free.jpeg> ;
-    foaf:mbox <mailto:LarryOctopus@aksw.org> ;
+    foaf:mbox <mailto:Octopus@aksw.org> ;
     foaf:phone <tel:+49-341-123456789> .
 
 ex:CorneliusCrab a foaf:Person;
@@ -17,7 +18,30 @@ ex:CorneliusCrab a foaf:Person;
     foaf:familyName "Crab" ;
     foaf:firstName "Cornelius" ;
     foaf:title "Dr." ;
+    foaf:status "Marketing Manager" ;
     ex:room "A-quarium" ;
     foaf:depiction <http://clipartix.com/wp-content/uploads/2016/04/Crab-clip-art-5-clipartwiz.png> ;
     foaf:mbox <mailto:Cornelius@aksw.org> ;
+    foaf:phone <tel:+49-341-123456789> .
+
+ex:LarryLobster a foaf:Person;
+    foaf:name "Larry Lobster" ;
+    foaf:familyName "Lobster" ;
+    foaf:firstName "Larry" ;
+    foaf:title "Dr." ;
+    foaf:status "HR Manager" ;
+    ex:room "A-quarium" ;
+    foaf:depiction <https://openclipart.org/image/2400px/svg_to_png/172473/cartoon-lobster.png> ;
+    foaf:mbox <mailto:Larry@aksw.org> ;
+    foaf:phone <tel:+49-341-123456789> .
+
+ex:AlfredEel a foaf:Person;
+    foaf:name "Alfred Eel" ;
+    foaf:familyName "E. Eel" ;
+    foaf:firstName "Alfred" ;
+    foaf:title "Mr." ;
+    foaf:status "Head Office" ;
+    ex:room "A-quarium" ;
+    foaf:depiction <http://img.clipartall.com/eel-clipart-eel-clipart-1640_1192.png> ;
+    foaf:mbox <mailto:Alfred@aksw.org> ;
     foaf:phone <tel:+49-341-123456789> .
