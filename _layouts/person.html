@@ -63,7 +63,7 @@ rdf_prefix_path: persons.pref
                                 </tr>
                                 {% endfor %}
                                 {% capture query %}
-                                SELECT ?x WHERE{<{{page.rdf}}> ex:room ?x .}
+                                SELECT ?x WHERE{<{{page.rdf}}> foaf:room ?x .}
                                 {% endcapture %}
                                 {% assign resultset = page.rdf | sparql_query: query %}
                                 {% for result in resultset %}
@@ -82,6 +82,6 @@ rdf_prefix_path: persons.pref
                     </div>
                 </div>
             </div>
-        </div>
+        <div>
     </div>
 </section>

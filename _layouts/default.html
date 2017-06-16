@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html>
+<meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="css/style.css">
+<title>meet our team</title>
 
 <body>
-    <div class="row">
-    {% for my_page in site.pages %}
-    {% if my_page.rdf.iri %}
-        <div class="col-md-6">
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="{{ my_page.url }}">
-                </iframe>
-            </div>
+
+
+    <div class="container">
+        <div class="heading-title text-center">
+            <h3 class="text-uppercase">Meet the Team</h3>
+            <p class="p-top-30 half-txt">Let's meet our fantastic team!</p>
         </div>
-    {% endif %}
-    {% endfor %}
-</div>
-</body>
-</html>
+        <div class="row">
+            {% for page in site.pages %}
+            {% if page.rdf.iri %}
+            <div class="col-md-4">
+                <div class="team-member">
+                    <div class="embed-responsive">
+                        <div class="team-img">
+                            <img src="{{ page.rdf | rdf_property: 'foaf:depiction'}}" alt="team member" class="rounded float-left img-fluid" style="height: auto; max-width: 100%;">
+                        </div>
+                        <div class="team-hover">
+                            <div class="desk">
+                                <h4>Hello World</h4>
+                                <p>I love to introduce myself as a hardcore Web Designer.</p>
+                            </div>
+                            <div class="s-link">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-title">
+                        <h5><a href="{{ page.url }}">{{ page.rdf | rdf_property: 'foaf:name' }}</a></h5>
+                        <span>HR Manager</span>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <div>
+            </body>
+            </html>
