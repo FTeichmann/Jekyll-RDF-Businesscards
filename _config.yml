@@ -19,7 +19,8 @@ jekyll_rdf:
     language: "en"
     include_blank: true
     render_orphaned_uris: true
-    restriction: "SELECT ?resourceUri WHERE { ?resourceUri a <http://xmlns.com/foaf/0.1/Person> }"
+    restriction: "SELECT ?resourceUri WHERE { { ?resourceUri a <http://xmlns.com/foaf/0.1/Person> . } UNION { ?resourceUri a <http://example.org/group> . } }"
     default_template: "default.html"
     class_template_mappings:
-        "http://xmlns.com/foaf/0.1/Person": "person.html"
+        "http://xmlns.com/foaf/0.1/Person" : "person.html"
+        "http://example.org/group" : "group.html"

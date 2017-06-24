@@ -2,7 +2,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix ex: <http://example.org/> .
 
-ex:OliverOctopus a foaf:Person;
+ex:OliverOctopus a foaf:Person ;
     foaf:name "Oliver Octopus" ;
     foaf:familyName "van Octopus" ;
     foaf:firstName "Oliver" ;
@@ -11,9 +11,11 @@ ex:OliverOctopus a foaf:Person;
     ex:room "A-quarium" ;
     foaf:depiction <https://images.freecreatives.com/wp-content/uploads/2016/02/Download-Optopus-Logo-For-Free.jpeg> ;
     foaf:mbox <mailto:Octopus@aksw.org> ;
-    foaf:phone <tel:+49-341-123456789> .
+    foaf:phone <tel:+49-341-123456789> ;
+    ex:group ex:Saltwaterbusiness ,
+        ex:Team .
 
-ex:CorneliusCrab a foaf:Person;
+ex:CorneliusCrab a foaf:Person ;
     foaf:name "Cornelius Crab" ;
     foaf:familyName "Crab" ;
     foaf:firstName "Cornelius" ;
@@ -22,9 +24,13 @@ ex:CorneliusCrab a foaf:Person;
     ex:room "A-quarium" ;
     foaf:depiction <http://clipartix.com/wp-content/uploads/2016/04/Crab-clip-art-5-clipartwiz.png> ;
     foaf:mbox <mailto:Cornelius@aksw.org> ;
-    foaf:phone <tel:+49-341-123456789> .
+    foaf:phone <tel:+49-341-123456789> ;
+    ex:group ex:Freshwaterbusiness ,
+        ex:Saltwaterbusiness ,
+        ex:Team .
 
-ex:LarryLobster a foaf:Person;
+
+ex:LarryLobster a foaf:Person ;
     foaf:name "Larry Lobster" ;
     foaf:familyName "Lobster" ;
     foaf:firstName "Larry" ;
@@ -33,9 +39,11 @@ ex:LarryLobster a foaf:Person;
     ex:room "A-quarium" ;
     foaf:depiction <https://openclipart.org/image/2400px/svg_to_png/172473/cartoon-lobster.png> ;
     foaf:mbox <mailto:Larry@aksw.org> ;
-    foaf:phone <tel:+49-341-123456789> .
+    foaf:phone <tel:+49-341-123456789> ;
+    ex:group ex:Saltwaterbusiness ,
+        ex:Team .
 
-ex:AlfredEel a foaf:Person;
+ex:AlfredEel a foaf:Person ;
     foaf:name "Alfred Eel" ;
     foaf:familyName "E. Eel" ;
     foaf:firstName "Alfred" ;
@@ -44,4 +52,15 @@ ex:AlfredEel a foaf:Person;
     ex:room "A-quarium" ;
     foaf:depiction <http://img.clipartall.com/eel-clipart-eel-clipart-1640_1192.png> ;
     foaf:mbox <mailto:Alfred@aksw.org> ;
-    foaf:phone <tel:+49-341-123456789> .
+    foaf:phone <tel:+49-341-123456789> ;
+    ex:group ex:Freshwaterbusiness ,
+        ex:Team .
+
+ex:Freshwaterbusiness a ex:group ;
+    ex:groupname "Freshwaterbusiness".
+
+ex:Saltwaterbusiness a ex:group ;
+    ex:groupname "Saltwaterbusiness".
+
+ex:Team a ex:group ;
+    ex:groupname "general".
