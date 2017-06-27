@@ -13,7 +13,6 @@ rdf_prefix_path: persons.pref
 <body>
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
         <img src="http://aksw.org/extensions/site/sites//local/images/logo-aksw.png" width="auto" height="auto" alt="AKSW">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -23,29 +22,26 @@ rdf_prefix_path: persons.pref
               <a class="nav-link" href="rdfsites/http/example.org/Team/index/">Team</a>
           </li>
         </ul>
-      </div>
     </nav>
     <div class="row">
     <nav class="navbar nav-pills flex-column navbar-light bg-faded">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" id="navleft">
             {% capture query %}
-            SELECT ?name WHERE{
+            SELECT ?name ?resource WHERE{
                 ?resource a ex:group ;
                 ex:groupname ?name
             }
             {% endcapture %}
             {% assign resultset = page.rdf | sparql_query: query %}
             {% for result in resultset %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{page.url}}">{{result.name}}</a>
-            </li>
             {% for page in site.pages %}
-            <!-- TODO comparison result variable "result.name" cant be used here. WHY? -->
-            {% if page.rdf.iri == result.name %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{page.url}}">{{result.name}}</a>
-            </li>
-            {% endif %}
+            <script>
+            if("{{page.rdf.iri}}" == "{{result.resource}}"){
+            document.getElementById('navleft').innerHTML += '<li class="nav-item">'+
+                '<a class="nav-link" href="{{page.url}}">{{result.name}}</a>'+
+                '</li>';
+            }
+            </script>
             {% endfor %}
             {% endfor %}
       </ul>
@@ -85,12 +81,13 @@ rdf_prefix_path: persons.pref
                         </div>
                     </div>
                 </div>
-                    <div class="team-title">
+                    <div class="team-title" id="{{result.name}}">
                         {% for page in site.pages %}
-                        <!-- TODO comparison result variable "result.person" cant be used here. WHY? -->
-                        {% if page.rdf.iri == result.person %}
-                            <h5><a href="{{ page.url }}">{{ result.name }}</a></h5>
-                        {% endif %}
+                        <script>
+                        if("{{page.rdf.iri}}" == "{{result.person}}"){
+                        document.getElementById('{{result.name}}').innerHTML += '<h5><a href="{{ page.url }}">{{ result.name }}</a></h5>';
+                        }
+                        </script>
                         {% endfor %}
                         <span>{{ result.status }}</span>
                 </div>
