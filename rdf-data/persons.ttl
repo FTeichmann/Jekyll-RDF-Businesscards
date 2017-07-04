@@ -15,8 +15,8 @@ ex:OliverOctopus a foaf:Person ;
     foaf:phone <tel:+49-341-123456789> ;
     ex:group ex:Saltwaterbusiness ,
         ex:Team ;
-    ex:project ex:Project1 ,
-        ex:Project2 .
+    ex:project ex:SHORE ,
+        ex:WAVE .
 
 ex:CorneliusCrab a foaf:Person ;
     foaf:name "Cornelius Crab" ;
@@ -31,7 +31,7 @@ ex:CorneliusCrab a foaf:Person ;
     ex:group ex:Freshwaterbusiness ,
         ex:Saltwaterbusiness ,
         ex:Team ;
-    ex:project ex:Project2 .
+    ex:project ex:WAVE .
 
 ex:LarryLobster a foaf:Person ;
     foaf:name "Larry Lobster" ;
@@ -45,7 +45,7 @@ ex:LarryLobster a foaf:Person ;
     foaf:phone <tel:+49-341-123456789> ;
     ex:group ex:Saltwaterbusiness ,
         ex:Team ;
-    ex:project ex:Project1 .
+    ex:project ex:SHORE .
 
 ex:AlfredEel a foaf:Person ;
     foaf:name "Alfred Eel" ;
@@ -59,9 +59,9 @@ ex:AlfredEel a foaf:Person ;
     foaf:phone <tel:+49-341-123456789> ;
     ex:group ex:Freshwaterbusiness ,
         ex:Team ;
-    ex:project ex:Project1 ,
-        ex:Project2 ,
-        ex:Project3 .
+    ex:project ex:SHORE ,
+        ex:WAVE ,
+        ex:CORALS .
 
 ex:Freshwaterbusiness a ex:group ;
     ex:groupname "Freshwaterbusiness".
@@ -72,21 +72,27 @@ ex:Saltwaterbusiness a ex:group ;
 ex:Team a ex:group ;
     ex:groupname "general".
 
-ex:Project1 a ex:project ;
-    ex:projectname "Project1" ;
-    ex:description "This Project is about things concerning 1" ;
+ex:SHORE a ex:project ;
+    ex:projectname "SHORE" ;
+    ex:description "The future of SHared Ontology REfining for enterprise business" ;
     ex:longdescription "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla suscipit nulla vel mollis. Aliquam erat volutpat. Nam et aliquam nisl. Ut sit amet pellentesque elit. Praesent sagittis tempus accumsan. In a nisi orci. Nullam at sagittis dolor. Sed nec auctor tellus. Phasellus ac magna ac mi posuere molestie. Integer dapibus venenatis nisl eget eleifend. Fusce ut pulvinar ipsum. Nulla elementum erat elit, et tempor massa aliquet vel. Vestibulum metus enim, tempus sed ligula et, pellentesque auctor lacus. Vivamus vel elit non justo rutrum ullamcorper vel et massa. Duis libero nisi, porta ullamcorper justo eu, imperdiet mattis ex. Fusce rhoncus. " .
 
-ex:Project2 a ex:project ;
-    ex:projectname "Project2" ;
-    ex:description "This Project is about things concerning 2" ;
+ex:WAVE a ex:project ;
+    ex:projectname "WAVE" ;
+    ex:description "Wealth Acquisition and Value Evaluation" ;
     ex:longdescription "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla suscipit nulla vel mollis. Aliquam erat volutpat. Nam et aliquam nisl. Ut sit amet pellentesque elit. Praesent sagittis tempus accumsan. In a nisi orci. Nullam at sagittis dolor. Sed nec auctor tellus. Phasellus ac magna ac mi posuere molestie. Integer dapibus venenatis nisl eget eleifend. Fusce ut pulvinar ipsum. Nulla elementum erat elit, et tempor massa aliquet vel. Vestibulum metus enim, tempus sed ligula et, pellentesque auctor lacus. Vivamus vel elit non justo rutrum ullamcorper vel et massa. Duis libero nisi, porta ullamcorper justo eu, imperdiet mattis ex. Fusce rhoncus. " .
 
-ex:Project3 a ex:project ;
-    ex:projectname "Project3" ;
-    ex:description "This Project is about things concerning 3" ;
+ex:CORALS a ex:project ;
+    ex:projectname "CORALS" ;
+    ex:description "CORporate Architecture Level and business strategy triggerS" ;
     ex:longdescription "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla suscipit nulla vel mollis. Aliquam erat volutpat. Nam et aliquam nisl. Ut sit amet pellentesque elit. Praesent sagittis tempus accumsan. In a nisi orci. Nullam at sagittis dolor. Sed nec auctor tellus. Phasellus ac magna ac mi posuere molestie. Integer dapibus venenatis nisl eget eleifend. Fusce ut pulvinar ipsum. Nulla elementum erat elit, et tempor massa aliquet vel. Vestibulum metus enim, tempus sed ligula et, pellentesque auctor lacus. Vivamus vel elit non justo rutrum ullamcorper vel et massa. Duis libero nisi, porta ullamcorper justo eu, imperdiet mattis ex. Fusce rhoncus. " .
 
 ex:Publication1 a ex:publication ;
-    dc:title "PublicationX" ;
+    dc:title "Powerful rewards as milestone towards accelerated control-based business opportunities" ;
     dc:author ex:AlfredEel .
+
+ex:Publication2 a ex:publication ;
+    dc:title "Global perspectives for objective driven net value" ;
+    dc:author ex:LarryLobster ,
+        ex:CorneliusCrab ,
+        ex:AlfredEel .
