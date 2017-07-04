@@ -3,101 +3,84 @@ rdf_prefix_path: persons.pref
 ---
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/style.css">
-<title>Meet the Team</title>
-</head>
+{% include head.html %}
 <body>
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <img src="http://aksw.org/extensions/site/sites//local/images/logo-aksw.png" width="auto" height="auto" alt="AKSW">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-              <!-- TODO: remove hardcoded fixed link -->
-              <a class="nav-link" href="rdfsites/http/example.org/Team/index/">Team</a>
-          </li>
-        </ul>
-    </nav>
+    {% include navbar.html %}
     <div class="row">
-    <nav class="navbar nav-pills flex-column navbar-light bg-faded">
-        <ul class="navbar-nav mr-auto" id="navleft">
-            {% capture query %}
-            SELECT ?name ?resource WHERE{
-                ?resource a ex:group ;
-                ex:groupname ?name
-            }
-            {% endcapture %}
-            {% assign resultset = page.rdf | sparql_query: query %}
-            {% for result in resultset %}
-            {% for page in site.pages %}
-            <script>
-            if("{{page.rdf.iri}}" == "{{result.resource}}"){
-            document.getElementById('navleft').innerHTML += '<li class="nav-item">'+
-                '<a class="nav-link" href="{{page.url}}">{{result.name}}</a>'+
-                '</li>';
-            }
-            </script>
-            {% endfor %}
-            {% endfor %}
-      </ul>
-    </nav>
-    <div class="container">
-        <div class="heading-title text-center">
-            <h3 class="text-uppercase">Meet the Team</h3>
-            <p class="p-top-30 half-txt">Let's meet our {{ page.rdf | rdf_property: 'ex:groupname'}} team!</p>
-        </div>
-        <div class="row">
-            {% capture query %}
-            SELECT ?person ?name ?title ?firstName ?familyName ?phone ?mbox ?status ?depiction WHERE{
-            ?person a foaf:Person ;
-                foaf:name ?name ;
-                foaf:familyName ?familyName ;
-                foaf:firstName ?firstName ;
-                foaf:title ?title ;
-                foaf:status ?status ;
-                foaf:depiction ?depiction ;
-                foaf:mbox ?mbox ;
-                foaf:phone ?phone ;
-                ex:group <{{ page.rdf.iri }}> .
-            }
-            {% endcapture %}
-            {% assign resultset = page.rdf | sparql_query: query %}
-            {% for result in resultset %}
-            <div class="col-md-4 team-member">
-                <div class="embed-responsive">
-                    <div class="team-img">
-                        <img src="{{ result.depiction }}" alt="team member" class="img-fluid" style="max-height:100%; max-width: auto; object-fit: contain">
-                    </div>
-                    <div class="team-hover">
-                        <div class="desk">
-                            <h4>{{ result.title }} {{ result.firstName }} {{ result.familyName }}</h4>
-                            <p><a href="{{ result.phone }}">{{ result.phone }}</a></p>
-                            <p><a href="{{ result.mbox }}">{{ result.mbox }}</p>
+        <!-- lefthand navbar with links to all gropus -->
+        <nav class="navbar nav-pills flex-column navbar-light bg-faded">
+            <ul class="navbar-nav mr-auto">
+                {% capture query %}
+                SELECT ?resource ?name WHERE{
+                    ?resource a ex:group ;
+                    ex:groupname ?name
+                }
+                {% endcapture %}
+                {% assign resultset = page.rdf | sparql_query: query %}
+                {% for result in resultset %}
+                {% for page in site.pages %}
+                {% assign value1 = page.rdf.iri | downcase %}
+                {% assign value2 = result.resource | downcase %}
+                {% if value1 == value2 %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{page.url}}">{{result.name}}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <div class="container">
+            <div class="heading-title text-center">
+                <h3 class="text-uppercase">Meet the Team</h3>
+                <p class="p-top-30 half-txt">Let's meet our {{ page.rdf | rdf_property: 'ex:groupname'}} team!</p>
+            </div>
+            <div class="row">
+                {% capture query %}
+                SELECT ?person ?name ?title ?firstName ?familyName ?phone ?mbox ?status ?depiction WHERE{
+                    ?person a foaf:Person ;
+                    foaf:name ?name ;
+                    foaf:familyName ?familyName ;
+                    foaf:firstName ?firstName ;
+                    foaf:title ?title ;
+                    foaf:status ?status ;
+                    foaf:depiction ?depiction ;
+                    foaf:mbox ?mbox ;
+                    foaf:phone ?phone ;
+                    ex:group <{{ page.rdf.iri }}> .
+                }
+                {% endcapture %}
+                {% assign resultset = page.rdf | sparql_query: query %}
+                {% for result in resultset %}
+                <div class="col-md-4 team-member">
+                    <div class="embed-responsive">
+                        <div class="team-img">
+                            <img src="{{ result.depiction }}" alt="team member" class="img-fluid" style="max-height:100%; max-width: auto; object-fit: contain">
                         </div>
-                    </div>
-                </div>
-                    <div class="team-title" id="{{result.name}}">
+                        <div class="team-hover">
+                            <div class="desk">
+                                <h4>{{ result.title }} {{ result.firstName }} {{ result.familyName }}</h4>
+                                <p><a href="{{ result.phone }}">{{ result.phone }}</a></p>
+                                <p><a href="{{ result.mbox }}">{{ result.mbox }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="team-title">
                         {% for page in site.pages %}
-                        <script>
-                        if("{{page.rdf.iri}}" == "{{result.person}}"){
-                        document.getElementById('{{result.name}}').innerHTML += '<h5><a href="{{ page.url }}">{{ result.name }}</a></h5>';
-                        }
-                        </script>
+                        {% assign person = result.person | downcase %}
+                        {% assign iri = page.rdf.iri | downcase %}
+                        {% if iri == person %}
+                            <h5><a href="{{ page.url }}">{{ result.name }}</a></h5>
+                        {% endif %}
                         {% endfor %}
                         <span>{{ result.status }}</span>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-        {% endfor %}
         </div>
     </div>
-    </div>
-    <footer class="container-fluid row text-center">
-      <p>Fantastic Footer</p>
-    </footer>
+{% include footer.html %}
 </body>
 </html>

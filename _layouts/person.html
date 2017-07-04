@@ -3,113 +3,103 @@ rdf_prefix_path: persons.pref
 ---
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/style.css">
-<title>Meet the Team</title>
-</head>
+{% include head.html %}
 <body>
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <img src="http://aksw.org/extensions/site/sites//local/images/logo-aksw.png" width="auto" height="auto" alt="AKSW">
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Team</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="card">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card-block">
-                        <h4 class="card-title">{{ page.rdf | rdf_property: 'foaf:name' }}</h4>
-                        <table class="table table-bordered table-hover">
-                            <tbody>
-                                {% capture query %}
-                                SELECT ?x WHERE{<{{page.rdf}}> foaf:title ?x .}
-                                {% endcapture %}
-                                {% assign resultset = page.rdf | sparql_query: query %}
-                                {% for result in resultset %}
-                                <tr>
-                                    <td>Title</td>
-                                    <td>{{ result.x }}</td>
-                                </tr>
-                                {% endfor %}
-                                {% capture query %}
-                                SELECT ?x WHERE{<{{page.rdf}}> foaf:firstName ?x .}
-                                {% endcapture %}
-                                {% assign resultset = page.rdf | sparql_query: query %}
-                                {% for result in resultset %}
-                                <tr>
-                                    <td>First Name</td>
-                                    <td>{{ result.x }}</td>
-                                </tr>
-                                {% endfor %}
-                                {% capture query %}
-                                SELECT ?x WHERE{<{{page.rdf}}> foaf:familyName ?x .}
-                                {% endcapture %}
-                                {% assign resultset = page.rdf | sparql_query: query %}
-                                {% for result in resultset %}
-                                <tr>
-                                    <td>Family Name</td>
-                                    <td>{{ result.x }}</td>
-                                </tr>
-                                {% endfor %}
-                                {% capture query %}
-                                SELECT ?x WHERE{<{{page.rdf}}> foaf:phone ?x .}
-                                {% endcapture %}
-                                {% assign resultset = page.rdf | sparql_query: query %}
-                                {% for result in resultset %}
-                                <tr>
-                                    <td>Phone</td>
-                                    <td><a href="{{ result.x }}">{{ result.x }}</td>
-                                </tr>
-                                {% endfor %}
-                                {% capture query %}
-                                SELECT ?x WHERE{<{{page.rdf}}> foaf:mbox ?x .}
-                                {% endcapture %}
-                                {% assign resultset = page.rdf | sparql_query: query %}
-                                {% for result in resultset %}
-                                <tr>
-                                    <td>Email</td>
-                                    <td><a href="{{ result.x }}">{{ result.x }}</td>
-                                </tr>
-                                {% endfor %}
-                                {% capture query %}
-                                SELECT ?x WHERE{<{{page.rdf}}> foaf:room ?x .}
-                                {% endcapture %}
-                                {% assign resultset = page.rdf | sparql_query: query %}
-                                {% for result in resultset %}
-                                <tr>
-                                    <td>Room</td>
-                                    <td>{{ result.x }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+    {% include navbar.html %}
+<div class="container">
+    <div class="card">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card-block">
+                    <h4 class="card-title">{{ page.rdf | rdf_property: 'foaf:name' }}</h4>
+                    <table class="table table-bordered table-hover">
+                    <tbody>
+                        {% capture query %}
+                        SELECT ?x WHERE{<{{page.rdf}}> foaf:title ?x .}
+                        {% endcapture %}
+                        {% assign resultset = page.rdf | sparql_query: query %}
+                        {% for result in resultset %}
+                        <tr>
+                            <td>Title</td>
+                            <td>{{ result.x }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% capture query %}
+                        SELECT ?x WHERE{<{{page.rdf}}> foaf:firstName ?x .}
+                        {% endcapture %}
+                        {% assign resultset = page.rdf | sparql_query: query %}
+                        {% for result in resultset %}
+                        <tr>
+                            <td>First Name</td>
+                            <td>{{ result.x }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% capture query %}
+                        SELECT ?x WHERE{<{{page.rdf}}> foaf:familyName ?x .}
+                        {% endcapture %}
+                        {% assign resultset = page.rdf | sparql_query: query %}
+                        {% for result in resultset %}
+                        <tr>
+                            <td>Family Name</td>
+                            <td>{{ result.x }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% capture query %}
+                        SELECT ?x WHERE{<{{page.rdf}}> foaf:phone ?x .}
+                        {% endcapture %}
+                        {% assign resultset = page.rdf | sparql_query: query %}
+                        {% for result in resultset %}
+                        <tr>
+                            <td>Phone</td>
+                            <td><a href="{{ result.x }}">{{ result.x }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% capture query %}
+                        SELECT ?x WHERE{<{{page.rdf}}> foaf:mbox ?x .}
+                        {% endcapture %}
+                        {% assign resultset = page.rdf | sparql_query: query %}
+                        {% for result in resultset %}
+                        <tr>
+                            <td>Email</td>
+                            <td><a href="{{ result.x }}">{{ result.x }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% capture query %}
+                        SELECT ?x WHERE{<{{page.rdf}}> foaf:room ?x .}
+                        {% endcapture %}
+                        {% assign resultset = page.rdf | sparql_query: query %}
+                        {% for result in resultset %}
+                        <tr>
+                            <td>Room</td>
+                            <td>{{ result.x }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
                 </div>
-                <div class="col-md-4">
-                    <div class="card-block">
-                        <img class="rounded float-left img-fluid" src="{{ page.rdf | rdf_property: 'foaf:depiction'}}" alt="Photo" style="padding: 0px; height: auto; max-width: 100%;">
-                    </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-block">
+                    <img class="rounded float-left img-fluid" src="{{ page.rdf | rdf_property: 'foaf:depiction'}}" alt="Photo" style="padding: 0px; height: auto; max-width: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card-block">
+                    <h4 class="card-title">Current Projects</h4>
+                    <p>content</p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card-block">
+                    <h4 class="card-title">Publications</h4>
+                    <p>content</p>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="container-fluid row text-center">
-        <p>Fantastic Footer</p>
-    </footer>
+</div>
+{% include footer.html %}
 </body>
 </html>

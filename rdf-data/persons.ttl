@@ -64,3 +64,12 @@ ex:Saltwaterbusiness a ex:group ;
 
 ex:Team a ex:group ;
     ex:groupname "general".
+
+ex:Project1 a ex:project ;
+    ex:projectname "Project1".
+
+ex:Project2 a ex:project ;
+    ex:projectname "Project2".
+
+ex:Project3 a ex:project ;
+    ex:projectname "Project3".

@@ -3,31 +3,13 @@ rdf_prefix_path: persons.pref
 ---
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
-    <title>AKSW</title>
-</head>
+
+{% include head.html %}
 <body>
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <img src="http://aksw.org/extensions/site/sites//local/images/logo-aksw.png" width="auto" height="auto" alt="AKSW">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <!-- TODO: remove hardcoded fixed link -->
-                    <a class="nav-link" href="rdfsites/http/example.org/Team/index/">Team</a>
-                </li>
-            </ul>
-    </nav>
+    {% include navbar.html %}
     <div class="container">
         <p> Welcome to the aksw.org Homepage. Please check out our Team Site. </p>
     </div>
-    <footer class="container-fluid row text-center">
-        <p>Fantastic Footer</p>
-    </footer>
+{% include footer.html %}
 </body>
 </html>
