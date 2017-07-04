@@ -1,4 +1,4 @@
-This is a small sample project to showcase a Linked Data driven businesscard.
+This is a small sample project to showcase a Linked Data driven business website using Jekyll-RDF.
 
 ## Dependencies
 
