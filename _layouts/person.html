@@ -85,16 +85,50 @@ rdf_prefix_path: persons.pref
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card-block">
                     <h4 class="card-title">Current Projects</h4>
-                    <p>content</p>
+                    <table class="table table-bordered table-hover">
+                    <tbody>
+                    {% capture query %}
+                    SELECT ?project ?projectname WHERE{
+                        <{{page.rdf}}> ex:project ?project .
+                        ?project ex:projectname ?projectname .
+                    }
+                    {% endcapture %}
+                    {% assign resultset = page.rdf | sparql_query: query %}
+                    {% for result in resultset %}
+                    {% for page in site.pages %}
+                    {% assign value1 = page.rdf.iri | downcase %}
+                    {% assign value2 = result.project | downcase %}
+                    {% if value1 == value2 %}
+                    <tr>
+                        <td><a href="{{page.url}}">{{result.projectname}}</a></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                    </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-md-8">
                 <div class="card-block">
                     <h4 class="card-title">Publications</h4>
-                    <p>content</p>
+                    {% capture query %}
+                    SELECT ?publication ?title WHERE{
+                        ?publication dc:author <{{page.rdf}}> .
+                        ?publication dc:title ?title .
+                    }
+                    {% endcapture %}
+                    {% assign resultset = page.rdf | sparql_query: query %}
+                    <div class="list-group">
+                    {% for result in resultset %}
+                        <div class="list-group-item">{{ result.title }}</div>
+                    {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
