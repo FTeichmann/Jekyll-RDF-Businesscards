@@ -6,7 +6,8 @@
         </li>
         <li class="nav-item">
             {% for page in site.pages %}
-            {% assign name = page.rdf | rdf_property: 'ex:groupname' %}
+            {% assign name = page.rdf | rdf_property: '<http://example.org/groupname>' %}
+            {{ name }}
             {% if name == 'general' %}
             <a class="nav-link" href="{{page.url}}">Team</a>
             {% endif %}
