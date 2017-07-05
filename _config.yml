@@ -1,6 +1,6 @@
 
 # Site settings
-url: http://yoursite.com
+url: http://example.org/
 title: Your awesome title
 email: your-email@domain.com
 description: jekyll-rdf businesscards
@@ -12,7 +12,7 @@ permalink: pretty
 
 
 # jekyll-rdf
-gems:
+plugins:
     - jekyll-rdf
 jekyll_rdf:
     path: "rdf-data/persons.ttl"
