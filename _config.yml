@@ -8,7 +8,6 @@ baseurl: ""
 
 # Build settings
 markdown: kramdown
-permalink: pretty
 
 
 # jekyll-rdf
