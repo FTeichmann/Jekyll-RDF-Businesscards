@@ -11,19 +11,19 @@ rdf_prefix_path: content.pref
     <div class="card">
         <div class="card-block">
         <div class="heading-title text-center">
-            <h3 class="text-uppercase">{{ page.rdf | rdf_property: 'ex:projectname' }}</h3>
-            <p class="p-top-30 half-txt">{{ page.rdf | rdf_property: 'ex:description'}}</p>
+            <h3 class="text-uppercase">{{ page.rdf | rdf_property: 'dc:title' }}</h3>
+            <p class="p-top-30 half-txt">a publication</p>
         </div>
         </div>
     <div class="row">
         <div class="col-md-6">
             <div class="card-block">
-                <h4 class="card-title">Project Member</h4>
+                <h4 class="card-title">Authors</h4>
                 <table class="table table-bordered table-hover">
                 <tbody>
                 {% capture query %}
                 SELECT ?person ?name WHERE{
-                    ?person ex:project <{{page.rdf}}> .
+                    <{{page.rdf}}> dc:author ?person .
                     ?person foaf:name ?name .
                 }
                 {% endcapture %}
@@ -45,31 +45,10 @@ rdf_prefix_path: content.pref
         </div>
         <div class="col-md-6">
             <div class="card-block">
-                <h4 class="card-title">Project Description</h4>
+                <h4 class="card-title">Abstract</h4>
                 <p> {{ page.rdf | rdf_property: 'ex:longdescription' }}
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card-block">
-                <h4 class="card-title">Publications</h4>
-                {% capture query %}
-                SELECT DISTINCT ?publication ?title WHERE{
-                    ?publication dc:author ?author .
-                    ?author ex:project <{{page.rdf}}> .
-                    ?publication dc:title ?title .
-                }
-                {% endcapture %}
-                {% assign resultset = page.rdf | sparql_query: query %}
-                <div class="list-group">
-                {% for result in resultset %}
-                    <div class="list-group-item">{{ result.title }}</div>
-                {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
     </div>
     </div>
 </div>

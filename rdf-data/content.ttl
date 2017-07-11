@@ -1,4 +1,5 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix ex: <http://example.org/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -13,8 +14,7 @@ ex:OliverOctopus a foaf:Person ;
     foaf:depiction <https://images.freecreatives.com/wp-content/uploads/2016/02/Download-Optopus-Logo-For-Free.jpeg> ;
     foaf:mbox <mailto:Octopus@aksw.org> ;
     foaf:phone <tel:+49-341-123456789> ;
-    ex:group ex:Saltwaterbusiness ,
-        ex:Team ;
+    ex:group ex:Saltwaterbusiness ;
     ex:project ex:SHORE ,
         ex:WAVE .
 
@@ -29,8 +29,7 @@ ex:CorneliusCrab a foaf:Person ;
     foaf:mbox <mailto:Cornelius@aksw.org> ;
     foaf:phone <tel:+49-341-123456789> ;
     ex:group ex:Freshwaterbusiness ,
-        ex:Saltwaterbusiness ,
-        ex:Team ;
+        ex:Saltwaterbusiness ;
     ex:project ex:WAVE .
 
 ex:LarryLobster a foaf:Person ;
@@ -43,8 +42,7 @@ ex:LarryLobster a foaf:Person ;
     foaf:depiction <https://openclipart.org/image/2400px/svg_to_png/172473/cartoon-lobster.png> ;
     foaf:mbox <mailto:Larry@aksw.org> ;
     foaf:phone <tel:+49-341-123456789> ;
-    ex:group ex:Saltwaterbusiness ,
-        ex:Team ;
+    ex:group ex:Saltwaterbusiness ;
     ex:project ex:SHORE .
 
 ex:AlfredEel a foaf:Person ;
@@ -57,42 +55,64 @@ ex:AlfredEel a foaf:Person ;
     foaf:depiction <http://img.clipartall.com/eel-clipart-eel-clipart-1640_1192.png> ;
     foaf:mbox <mailto:Alfred@aksw.org> ;
     foaf:phone <tel:+49-341-123456789> ;
-    ex:group ex:Freshwaterbusiness ,
-        ex:Team ;
+    ex:group ex:Freshwaterbusiness ;
     ex:project ex:SHORE ,
         ex:WAVE ,
         ex:CORALS .
 
 ex:Freshwaterbusiness a ex:group ;
-    ex:groupname "Freshwaterbusiness".
+    rdfs:label "Freshwaterbusiness".
 
 ex:Saltwaterbusiness a ex:group ;
-    ex:groupname "Saltwaterbusiness".
+    rdfs:label "Saltwaterbusiness".
 
-ex:Team a ex:group ;
-    ex:groupname "general".
 
 ex:SHORE a ex:project ;
-    ex:projectname "SHORE" ;
+    rdfs:label "SHORE" ;
     ex:description "The future of SHared Ontology REfining for enterprise business" ;
     ex:longdescription "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla suscipit nulla vel mollis. Aliquam erat volutpat. Nam et aliquam nisl. Ut sit amet pellentesque elit. Praesent sagittis tempus accumsan. In a nisi orci. Nullam at sagittis dolor. Sed nec auctor tellus. Phasellus ac magna ac mi posuere molestie. Integer dapibus venenatis nisl eget eleifend. Fusce ut pulvinar ipsum. Nulla elementum erat elit, et tempor massa aliquet vel. Vestibulum metus enim, tempus sed ligula et, pellentesque auctor lacus. Vivamus vel elit non justo rutrum ullamcorper vel et massa. Duis libero nisi, porta ullamcorper justo eu, imperdiet mattis ex. Fusce rhoncus. " .
 
 ex:WAVE a ex:project ;
-    ex:projectname "WAVE" ;
+    rdfs:label "WAVE" ;
     ex:description "Wealth Acquisition and Value Evaluation" ;
     ex:longdescription "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla suscipit nulla vel mollis. Aliquam erat volutpat. Nam et aliquam nisl. Ut sit amet pellentesque elit. Praesent sagittis tempus accumsan. In a nisi orci. Nullam at sagittis dolor. Sed nec auctor tellus. Phasellus ac magna ac mi posuere molestie. Integer dapibus venenatis nisl eget eleifend. Fusce ut pulvinar ipsum. Nulla elementum erat elit, et tempor massa aliquet vel. Vestibulum metus enim, tempus sed ligula et, pellentesque auctor lacus. Vivamus vel elit non justo rutrum ullamcorper vel et massa. Duis libero nisi, porta ullamcorper justo eu, imperdiet mattis ex. Fusce rhoncus. " .
 
 ex:CORALS a ex:project ;
-    ex:projectname "CORALS" ;
+    rdfs:label "CORALS" ;
     ex:description "CORporate Architecture Level and business strategy triggerS" ;
     ex:longdescription "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla suscipit nulla vel mollis. Aliquam erat volutpat. Nam et aliquam nisl. Ut sit amet pellentesque elit. Praesent sagittis tempus accumsan. In a nisi orci. Nullam at sagittis dolor. Sed nec auctor tellus. Phasellus ac magna ac mi posuere molestie. Integer dapibus venenatis nisl eget eleifend. Fusce ut pulvinar ipsum. Nulla elementum erat elit, et tempor massa aliquet vel. Vestibulum metus enim, tempus sed ligula et, pellentesque auctor lacus. Vivamus vel elit non justo rutrum ullamcorper vel et massa. Duis libero nisi, porta ullamcorper justo eu, imperdiet mattis ex. Fusce rhoncus. " .
 
 ex:Publication1 a ex:publication ;
+    rdfs:label "business opportunities" ;
     dc:title "Powerful rewards as milestone towards accelerated control-based business opportunities" ;
+    ex:longdescription "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla suscipit nulla vel mollis. Aliquam erat volutpat. Nam et aliquam nisl. Ut sit amet pellentesque elit. Praesent sagittis tempus accumsan. In a nisi orci. Nullam at sagittis dolor. Sed nec auctor tellus. Phasellus ac magna ac mi posuere molestie. Integer dapibus venenatis nisl eget eleifend. Fusce ut pulvinar ipsum. Nulla elementum erat elit, et tempor massa aliquet vel. Vestibulum metus enim, tempus sed ligula et, pellentesque auctor lacus. Vivamus vel elit non justo rutrum ullamcorper vel et massa. Duis libero nisi, porta ullamcorper justo eu, imperdiet mattis ex. Fusce rhoncus. " ;
     dc:author ex:AlfredEel .
 
 ex:Publication2 a ex:publication ;
+    rdfs:label "net value" ;
     dc:title "Global perspectives for objective driven net value" ;
+    ex:longdescription "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla suscipit nulla vel mollis. Aliquam erat volutpat. Nam et aliquam nisl. Ut sit amet pellentesque elit. Praesent sagittis tempus accumsan. In a nisi orci. Nullam at sagittis dolor. Sed nec auctor tellus. Phasellus ac magna ac mi posuere molestie. Integer dapibus venenatis nisl eget eleifend. Fusce ut pulvinar ipsum. Nulla elementum erat elit, et tempor massa aliquet vel. Vestibulum metus enim, tempus sed ligula et, pellentesque auctor lacus. Vivamus vel elit non justo rutrum ullamcorper vel et massa. Duis libero nisi, porta ullamcorper justo eu, imperdiet mattis ex. Fusce rhoncus. " ;
     dc:author ex:LarryLobster ,
         ex:CorneliusCrab ,
         ex:AlfredEel .
+
+ex:Mainnav a ex:navigation ;
+    rdf:1 ex:group ;
+    rdf:2 ex:project ;
+    rdf:3 ex:publication .
+
+ex:group a foaf:Document ;
+    rdfs:label "Groups" .
+
+ex:project a foaf:Document ;
+    rdfs:label "Projects" .
+
+ex:publication a foaf:Document ;
+    rdfs:label "Publications" .
+
+rdf:1 a rdfs:ContainerMembershipProperty ;
+    rdfs:label "1" .
+rdf:2 a rdfs:ContainerMembershipProperty ;
+    rdfs:label "2" .
+rdf:3 a rdfs:ContainerMembershipProperty ;
+    rdfs:label "3" .

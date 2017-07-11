@@ -15,15 +15,21 @@ permalink: pretty
 plugins:
     - jekyll-rdf
 jekyll_rdf:
-    path: "rdf-data/persons.ttl"
+    path: "rdf-data/content.ttl"
     language: "en"
     include_blank: true
     render_orphaned_uris: true
-    restriction: "SELECT ?resourceUri WHERE { { ?resourceUri a <http://xmlns.com/foaf/0.1/Person> . }
-                UNION { ?resourceUri a <http://example.org/group> . }
-                UNION { ?resourceUri a <http://example.org/project> . } }"
+    restriction: "SELECT ?resourceUri WHERE {
+                 { ?resourceUri a <http://example.org/group> . }
+                UNION { ?resourceUri a <http://example.org/project> . }
+                UNION { ?resourceUri a <http://example.org/publication> . }
+                UNION { ?resourceUri a <http://xmlns.com/foaf/0.1/Person> . }
+                UNION { ?resourceUri a <http://xmlns.com/foaf/0.1/Document> . }
+                }"
     default_template: "default.html"
     class_template_mappings:
         "http://xmlns.com/foaf/0.1/Person" : "person.html"
         "http://example.org/group" : "group.html"
         "http://example.org/project" : "project.html"
+        "http://example.org/publication" : "publication.html"
+        "http://xmlns.com/foaf/0.1/Document" : "document.html"

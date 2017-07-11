@@ -4,36 +4,61 @@
         <li class="nav-item">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-            {% for page in site.pages %}
-            {% assign name = page.rdf | rdf_property: 'ex:groupname' %}
-            {% if name == 'general' %}
-            <a class="nav-link" href="{{page.url}}">Team</a>
-            {% endif %}
-            {% endfor %}
-        </li>
-        <li class="nav-item btn-group">
-            <a class="dropdown-toggle nav-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Projects
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                {% capture query %}
-                SELECT ?resource ?name WHERE{
-                    ?resource a ex:project ;
-                    ex:projectname ?name
-                }
-                {% endcapture %}
-                {% assign resultset = page.rdf | sparql_query: query %}
-                {% for result in resultset %}
+        {% assign count = 0 %}
+        {% capture query %}
+        # select all main Navigation entries for counting
+        SELECT ?position WHERE{
+            ex:Mainnav ?positionProp ?resource .
+            ?positionProp a rdfs:ContainerMembershipProperty .
+            ?positionProp rdfs:label ?position .
+            ?resource a foaf:Document .
+        }
+        {% endcapture %}
+        {% assign resultset = page.rdf | sparql_query: query %}
+        {% for result in resultset %}
+            {% assign count = count | plus : 1 %}
+            {% capture query2 %}
+            # select menu entry for current count
+            SELECT ?resource ?label WHERE{
+                ex:Mainnav ?positionProp ?resource .
+                ?positionProp a rdfs:ContainerMembershipProperty .
+                ?positionProp rdfs:label "{{count}}" .
+                ?resource a foaf:Document .
+                ?resource rdfs:label ?label .
+            }
+            {% endcapture %}
+            {% assign resultset2 = page.rdf | sparql_query: query2 %}
+            {% for result2 in resultset2 %}
                 {% for page in site.pages %}
-                {% assign value1 = page.rdf.iri | downcase %}
-                {% assign value2 = result.resource | downcase %}
-                {% if value1 == value2 %}
-                <a class="dropdown-item" href="{{page.url}}">{{result.name}}</a>
-                {% endif %}
+                    {% assign value1 = page.rdf.iri | downcase %}
+                    {% assign value2 = result2.resource | downcase %}
+                    {% if value1 == value2 %}
+                    <li class="nav-item btn-group">
+                        <a class="dropdown-toggle nav-link" href="{{ page.url }}" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ result2.label }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        {% capture query3 %}
+                        SELECT ?resource ?name WHERE{
+                        ?resource a <{{ result2.resource }}> .
+                        ?resource rdfs:label ?name .
+                        }
+                        {% endcapture %}
+                        {% assign resultset3 = page.rdf | sparql_query: query3 %}
+                        {% for result3 in resultset3 %}
+                            {% for page2 in site.pages %}
+                                {% assign value1 = page2.rdf.iri | downcase %}
+                                {% assign value2 = result3.resource | downcase %}
+                                {% if value1 == value2 %}
+                                <a class="dropdown-item" href="{{ page2.url }}">{{result3.name}}</a>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        </div>
+                    </li>
+                    {% endif %}
                 {% endfor %}
-                {% endfor %}
-            </div>
-        </li>
+            {% endfor %}
+        {% endfor %}
     </ul>
 </nav>
