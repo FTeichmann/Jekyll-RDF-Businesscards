@@ -1,0 +1,39 @@
+---
+rdf_prefix_path: content.pref
+---
+<!DOCTYPE html>
+<html>
+
+{% include head.html %}
+<body>
+    {% include navbar.html %}
+    <div class="container">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card-block">
+                        <h4 class="card-title">Our Publications</h4>
+                        {% capture query %}
+                        SELECT ?publication ?title WHERE{
+                            ?publication a ex:publication .
+                            ?publication dc:title ?title .
+                        }
+                        {% endcapture %}
+                        {% assign resultset = page.rdf | sparql_query: query %}
+                        <div class="list-group">
+                        {% for result in resultset %}
+                            {% for site in site.pages %}
+                            {% if site.rdf.iri == result.publication.iri %}
+                            <div class="list-group-item"><a href="{{site.url}}">{{ result.title }}</a></div>
+                            {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% include footer.html %}
+</body>
+</html>

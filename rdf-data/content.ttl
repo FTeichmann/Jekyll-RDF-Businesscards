@@ -4,6 +4,8 @@
 @prefix ex: <http://example.org/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
+<http://example.org/> a foaf:Document .
+
 ex:OliverOctopus a foaf:Person ;
     foaf:name "Oliver Octopus" ;
     foaf:familyName "van Octopus" ;
@@ -102,7 +104,9 @@ ex:Mainnav a ex:navigation ;
     rdf:3 ex:publication .
 
 ex:group a foaf:Document ;
-    rdfs:label "Groups" .
+    rdfs:label "Groups" ;
+    rdf:1 ex:Saltwaterbusiness ;
+    rdf:2 ex:Freshwaterbusiness .
 
 ex:project a foaf:Document ;
     rdfs:label "Projects" .

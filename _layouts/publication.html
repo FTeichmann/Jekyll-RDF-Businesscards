@@ -30,9 +30,7 @@ rdf_prefix_path: content.pref
                 {% assign resultset = page.rdf | sparql_query: query %}
                 {% for result in resultset %}
                 {% for page in site.pages %}
-                {% assign value1 = page.rdf.iri | downcase %}
-                {% assign value2 = result.person | downcase %}
-                {% if value1 == value2 %}
+                {% if page.rdf.iri == result.person.iri %}
                 <tr>
                     <td><a href="{{page.url}}">{{result.name}}</a></td>
                 </tr>

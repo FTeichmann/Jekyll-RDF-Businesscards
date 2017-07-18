@@ -2,16 +2,15 @@
     <img src="http://aksw.org/extensions/site/sites//local/images/logo-aksw.png" width="auto" height="auto" alt="AKSW">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/">Home</a>
         </li>
         {% assign count = 0 %}
         {% capture query %}
-        # select all main Navigation entries for counting
+        # select all main Navigation position properties for counting
         SELECT ?position WHERE{
             ex:Mainnav ?positionProp ?resource .
             ?positionProp a rdfs:ContainerMembershipProperty .
             ?positionProp rdfs:label ?position .
-            ?resource a foaf:Document .
         }
         {% endcapture %}
         {% assign resultset = page.rdf | sparql_query: query %}
@@ -30,31 +29,31 @@
             {% assign resultset2 = page.rdf | sparql_query: query2 %}
             {% for result2 in resultset2 %}
                 {% for page in site.pages %}
-                    {% assign value1 = page.rdf.iri | downcase %}
-                    {% assign value2 = result2.resource | downcase %}
-                    {% if value1 == value2 %}
+                    {% if page.rdf.iri == result2.resource.iri %}
                     <li class="nav-item btn-group">
-                        <a class="dropdown-toggle nav-link" href="{{ page.url }}" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link" href="{{ page.url }}">
                             {{ result2.label }}
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         {% capture query3 %}
                         SELECT ?resource ?name WHERE{
-                        ?resource a <{{ result2.resource }}> .
+                        <{{ result2.resource }}> ?positionProp ?resource .
+                        ?positionProp a rdfs:ContainerMembershipProperty .
                         ?resource rdfs:label ?name .
                         }
                         {% endcapture %}
                         {% assign resultset3 = page.rdf | sparql_query: query3 %}
+                        {% if resultset3.size > 0 %}
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu">
                         {% for result3 in resultset3 %}
                             {% for page2 in site.pages %}
-                                {% assign value1 = page2.rdf.iri | downcase %}
-                                {% assign value2 = result3.resource | downcase %}
-                                {% if value1 == value2 %}
+                                {% if page2.rdf.iri == result3.resource.iri %}
                                 <a class="dropdown-item" href="{{ page2.url }}">{{result3.name}}</a>
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
                         </div>
+                        {% endif %}
                     </li>
                     {% endif %}
                 {% endfor %}
