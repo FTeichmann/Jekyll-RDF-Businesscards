@@ -86,7 +86,7 @@ rdf_prefix_path: content.pref
                         </tr>
                         {% endfor %}
                         {% capture query %}
-                        SELECT ?x WHERE{<{{page.rdf}}> foaf:room ?x .}
+                        SELECT ?x WHERE{<{{page.rdf}}> ex:room ?x .}
                         {% endcapture %}
                         {% assign resultset = page.rdf | sparql_query: query %}
                         {% for result in resultset %}
@@ -114,7 +114,7 @@ rdf_prefix_path: content.pref
                     {% capture query %}
                     SELECT ?project ?projectname WHERE{
                         <{{page.rdf}}> ex:project ?project .
-                        ?project ex:projectname ?projectname .
+                        ?project rdfs:label ?projectname .
                     }
                     {% endcapture %}
                     {% assign resultset = page.rdf | sparql_query: query %}
@@ -145,7 +145,11 @@ rdf_prefix_path: content.pref
                     {% assign resultset = page.rdf | sparql_query: query %}
                     <div class="list-group">
                     {% for result in resultset %}
-                        <div class="list-group-item">{{ result.title }}</div>
+                        {% for page in site.pages %}
+                        {% if page.rdf.iri == result.publication.iri %}
+                        <div class="list-group-item"><a href="{{page.url}}">{{ result.title }}</a></div>
+                        {% endif %}
+                        {% endfor %}
                     {% endfor %}
                     </div>
                 </div>
