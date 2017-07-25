@@ -3,27 +3,7 @@ rdf_prefix_path: content.pref
 layout: default
 ---
 <div class="row">
-    <!-- lefthand navbar with links to all gropus -->
-    <nav class="navbar nav-pills flex-column navbar-light bg-faded">
-        <ul class="navbar-nav mr-auto">
-            {% capture query %}
-            SELECT ?resource ?name WHERE{
-                ?resource a ex:group ;
-                rdfs:label ?name
-            }
-            {% endcapture %}
-            {% assign resultset = page.rdf | sparql_query: query %}
-            {% for result in resultset %}
-            {% for page in site.pages %}
-            {% if page.rdf.iri == result.resource.iri %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{page.url}}">{{result.name}}</a>
-            </li>
-            {% endif %}
-            {% endfor %}
-            {% endfor %}
-        </ul>
-    </nav>
+{% include navleft.html %}
 
     <div class="container">
         <div class="heading-title text-center">
@@ -32,17 +12,17 @@ layout: default
         </div>
         <div class="row">
             {% capture query %}
-            SELECT ?person ?name ?title ?firstName ?familyName ?phone ?mbox ?status ?depiction WHERE{
+            SELECT DISTINCT ?person ?name ?title ?firstName ?familyName ?phone ?mbox ?status ?depiction WHERE{
                 ?person a foaf:Person ;
                 foaf:name ?name ;
-                foaf:familyName ?familyName ;
-                foaf:firstName ?firstName ;
-                foaf:title ?title ;
-                foaf:status ?status ;
-                foaf:depiction ?depiction ;
-                foaf:mbox ?mbox ;
-                foaf:phone ?phone ;
                 ex:group <{{ page.rdf.iri }}> .
+                OPTIONAL { ?person foaf:familyName ?familyName }
+                OPTIONAL { ?person foaf:firstName ?firstName }
+                OPTIONAL { ?person foaf:title ?title }
+                OPTIONAL { ?person foaf:status ?status }
+                OPTIONAL { ?person foaf:depiction ?depiction }
+                OPTIONAL { ?person foaf:mbox ?mbox }
+                OPTIONAL { ?person foaf:phone ?phone }
             }
             {% endcapture %}
             {% assign resultset = page.rdf | sparql_query: query %}

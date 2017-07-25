@@ -1,0 +1,21 @@
+<!-- lefthand navbar with links to all gropus -->
+<nav class="navbar nav-pills flex-column navbar-light bg-faded">
+    <ul class="navbar-nav mr-auto">
+        {% capture query %}
+        SELECT ?resource ?name WHERE{
+            ?resource a ex:group ;
+            rdfs:label ?name
+        }
+        {% endcapture %}
+        {% assign resultset = page.rdf | sparql_query: query %}
+        {% for result in resultset %}
+        {% for page in site.pages %}
+        {% if page.rdf.iri == result.resource.iri %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{page.url}}">{{result.name}}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </ul>
+</nav>

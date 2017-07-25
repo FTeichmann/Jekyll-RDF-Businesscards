@@ -3,26 +3,7 @@ rdf_prefix_path: content.pref
 layout: default
 ---
 <div class="row">
-<nav class="navbar nav-pills flex-column navbar-light bg-faded">
-    <ul class="navbar-nav mr-auto">
-        {% capture query %}
-        SELECT ?resource ?name WHERE{
-            ?resource a ex:group ;
-            rdfs:label ?name
-        }
-        {% endcapture %}
-        {% assign resultset = page.rdf | sparql_query: query %}
-        {% for result in resultset %}
-        {% for page in site.pages %}
-        {% if page.rdf.iri == result.resource.iri %}
-        <li class="nav-item">
-            <a class="nav-link" href="{{page.url}}">{{result.name}}</a>
-        </li>
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-    </ul>
-</nav>
+{% include navleft.html %}
 <div class="container">
     <div class="card">
         <div class="row">
@@ -31,36 +12,27 @@ layout: default
                     <h4 class="card-title">{{ page.rdf | rdf_property: 'foaf:name' }}</h4>
                     <table class="table table-bordered table-hover">
                     <tbody>
-                        {% capture query %}
-                        SELECT ?x WHERE{<{{page.rdf}}> foaf:title ?x .}
-                        {% endcapture %}
-                        {% assign resultset = page.rdf | sparql_query: query %}
-                        {% for result in resultset %}
+                        {% assign title = page.rdf | rdf_property: 'foaf:title' %}
+                        {% if title %}
                         <tr>
                             <td>Title</td>
-                            <td>{{ result.x }}</td>
+                            <td>{{ title }}</td>
                         </tr>
-                        {% endfor %}
-                        {% capture query %}
-                        SELECT ?x WHERE{<{{page.rdf}}> foaf:firstName ?x .}
-                        {% endcapture %}
-                        {% assign resultset = page.rdf | sparql_query: query %}
-                        {% for result in resultset %}
+                        {% endif %}
+                        {% assign firstname = page.rdf | rdf_property: 'foaf:firstName' %}
+                        {% if firstname %}
                         <tr>
                             <td>First Name</td>
-                            <td>{{ result.x }}</td>
+                            <td>{{ firstname }}</td>
                         </tr>
-                        {% endfor %}
-                        {% capture query %}
-                        SELECT ?x WHERE{<{{page.rdf}}> foaf:familyName ?x .}
-                        {% endcapture %}
-                        {% assign resultset = page.rdf | sparql_query: query %}
-                        {% for result in resultset %}
+                        {% endif %}
+                        {% assign familyname = page.rdf | rdf_property: 'foaf:familyName' %}
+                        {% if familyname %}
                         <tr>
                             <td>Family Name</td>
-                            <td>{{ result.x }}</td>
+                            <td>{{ familyname }}</td>
                         </tr>
-                        {% endfor %}
+                        {% endif %}
                         {% capture query %}
                         SELECT ?x WHERE{<{{page.rdf}}> foaf:phone ?x .}
                         {% endcapture %}
