@@ -33,7 +33,7 @@ jekyll_rdf:
         "http://example.org/publication" : "publication.html"
         "http://xmlns.com/foaf/0.1/Document" : "document.html"
     instance_template_mappings:
-        "http://example.org/" : "default.html"
+        "http://example.org/" : "main.html"
         "http://example.org/group" : "groupmain.html"
         "http://example.org/publication" : "publicationmain.html"
         "http://example.org/project" : "projectmain.html"

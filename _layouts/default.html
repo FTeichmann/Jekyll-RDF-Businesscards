@@ -7,9 +7,10 @@ rdf_prefix_path: content.pref
 {% include head.html %}
 <body>
     {% include navbar.html %}
-    <div class="container">
-        <p> Welcome to the aksw.org Homepage. Please check out our Team Site. </p>
+    <div class="page-content">
+        {{ content }}
     </div>
-{% include footer.html %}
+
+    {% include footer.html %}
 </body>
 </html>

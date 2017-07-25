@@ -1,11 +1,7 @@
 ---
 rdf_prefix_path: content.pref
+layout: default
 ---
-<!DOCTYPE html>
-<html>
-{% include head.html %}
-<body>
-    {% include navbar.html %}
 <div class="row">
 <nav class="navbar nav-pills flex-column navbar-light bg-faded">
     <ul class="navbar-nav mr-auto">
@@ -132,17 +128,18 @@ rdf_prefix_path: content.pref
                 </div>
             </div>
         </div>
+        {% capture query %}
+        SELECT ?publication ?title WHERE{
+            ?publication dc:author <{{page.rdf}}> .
+            ?publication dc:title ?title .
+        }
+        {% endcapture %}
+        {% assign resultset = page.rdf | sparql_query: query %}
+        {% if resultset.size > 0 %}
         <div class="row">
             <div class="col-md-8">
                 <div class="card-block">
                     <h4 class="card-title">Publications</h4>
-                    {% capture query %}
-                    SELECT ?publication ?title WHERE{
-                        ?publication dc:author <{{page.rdf}}> .
-                        ?publication dc:title ?title .
-                    }
-                    {% endcapture %}
-                    {% assign resultset = page.rdf | sparql_query: query %}
                     <div class="list-group">
                     {% for result in resultset %}
                         {% for page in site.pages %}
@@ -155,9 +152,7 @@ rdf_prefix_path: content.pref
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 </div>
-{% include footer.html %}
-</body>
-</html>

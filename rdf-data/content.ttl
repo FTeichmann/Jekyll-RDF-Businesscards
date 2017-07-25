@@ -54,7 +54,7 @@ ex:AlfredEel a foaf:Person ;
     foaf:title "Mr." ;
     foaf:status "Head Office" ;
     ex:room "A-quarium" ;
-    foaf:depiction <http://img.clipartall.com/eel-clipart-eel-clipart-1640_1192.png> ;
+    foaf:depiction <https://thecliparts.com/wp-content/uploads/2016/09/free-eel-clipart.png> ;
     foaf:mbox <mailto:Alfred@aksw.org> ;
     foaf:phone <tel:+49-341-123456789> ;
     ex:group ex:Freshwaterbusiness ;

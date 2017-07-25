@@ -1,12 +1,7 @@
 ---
 rdf_prefix_path: content.pref
+layout: default
 ---
-<!DOCTYPE html>
-<html>
-{% include head.html %}
-<body>
-{% include navbar.html %}
-
 <div class="container">
     <div class="card">
         <div class="card-block">
@@ -62,7 +57,11 @@ rdf_prefix_path: content.pref
                 {% assign resultset = page.rdf | sparql_query: query %}
                 <div class="list-group">
                 {% for result in resultset %}
-                    <div class="list-group-item">{{ result.title }}</div>
+                {% for site in site.pages %}
+                {% if site.rdf.iri == result.publication.iri %}
+                <div class="list-group-item"><a href="{{site.url}}">{{ result.title }}</a></div>
+                {% endif %}
+                {% endfor %}
                 {% endfor %}
                 </div>
             </div>
@@ -71,6 +70,3 @@ rdf_prefix_path: content.pref
     </div>
     </div>
 </div>
-{% include footer.html %}
-</body>
-</html>
