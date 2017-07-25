@@ -33,36 +33,27 @@ layout: default
                             <td>{{ familyname }}</td>
                         </tr>
                         {% endif %}
-                        {% capture query %}
-                        SELECT ?x WHERE{<{{page.rdf}}> foaf:phone ?x .}
-                        {% endcapture %}
-                        {% assign resultset = page.rdf | sparql_query: query %}
-                        {% for result in resultset %}
+                        {% assign phone = page.rdf | rdf_property: 'foaf:phone' %}
+                        {% if phone %}
                         <tr>
                             <td>Phone</td>
-                            <td><a href="{{ result.x }}">{{ result.x }}</td>
+                            <td><a href="{{ phone }}">{{ phone }}</td>
                         </tr>
-                        {% endfor %}
-                        {% capture query %}
-                        SELECT ?x WHERE{<{{page.rdf}}> foaf:mbox ?x .}
-                        {% endcapture %}
-                        {% assign resultset = page.rdf | sparql_query: query %}
-                        {% for result in resultset %}
+                        {% endif %}
+                        {% assign mbox  = page.rdf | rdf_property: 'foaf:mbox' %}
+                        {% if mbox %}
                         <tr>
                             <td>Email</td>
-                            <td><a href="{{ result.x }}">{{ result.x }}</td>
+                            <td><a href="{{ mbox }}">{{ mbox }}</td>
                         </tr>
-                        {% endfor %}
-                        {% capture query %}
-                        SELECT ?x WHERE{<{{page.rdf}}> ex:room ?x .}
-                        {% endcapture %}
-                        {% assign resultset = page.rdf | sparql_query: query %}
-                        {% for result in resultset %}
+                        {% endif %}
+                        {% assign room = page.rdf | rdf_property: 'ex:room' %}
+                        {% if room %}
                         <tr>
                             <td>Room</td>
-                            <td>{{ result.x }}</td>
+                            <td>{{ room }}</td>
                         </tr>
-                        {% endfor %}
+                        {% endif %}
                     </tbody>
                     </table>
                 </div>
@@ -73,19 +64,20 @@ layout: default
                 </div>
             </div>
         </div>
+        {% capture query %}
+        SELECT ?project ?projectname WHERE{
+            <{{page.rdf}}> ex:project ?project .
+            ?project rdfs:label ?projectname .
+        }
+        {% endcapture %}
+        {% assign resultset = page.rdf | sparql_query: query %}
+        {% if resultset.size > 0 %}
         <div class="row">
             <div class="col-md-6">
                 <div class="card-block">
                     <h4 class="card-title">Current Projects</h4>
                     <table class="table table-bordered table-hover">
                     <tbody>
-                    {% capture query %}
-                    SELECT ?project ?projectname WHERE{
-                        <{{page.rdf}}> ex:project ?project .
-                        ?project rdfs:label ?projectname .
-                    }
-                    {% endcapture %}
-                    {% assign resultset = page.rdf | sparql_query: query %}
                     {% for result in resultset %}
                     {% for page in site.pages %}
                     {% if page.rdf.iri == result.project.iri %}
@@ -100,6 +92,7 @@ layout: default
                 </div>
             </div>
         </div>
+        {% endif %}
         {% capture query %}
         SELECT ?publication ?title WHERE{
             ?publication dc:author <{{page.rdf}}> .

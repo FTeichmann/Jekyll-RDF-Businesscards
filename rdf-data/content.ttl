@@ -99,14 +99,14 @@ ex:Publication2 a ex:publication ;
         ex:AlfredEel .
 
 ex:Mainnav a ex:navigation ;
-    rdf:1 ex:group ;
-    rdf:2 ex:project ;
-    rdf:3 ex:publication .
+    rdf:_1 ex:group ;
+    rdf:_2 ex:project ;
+    rdf:_3 ex:publication .
 
 ex:group a foaf:Document ;
     rdfs:label "Groups" ;
-    rdf:1 ex:Saltwaterbusiness ;
-    rdf:2 ex:Freshwaterbusiness .
+    rdf:_1 ex:Saltwaterbusiness ;
+    rdf:_2 ex:Freshwaterbusiness .
 
 ex:project a foaf:Document ;
     rdfs:label "Projects" .
@@ -114,9 +114,9 @@ ex:project a foaf:Document ;
 ex:publication a foaf:Document ;
     rdfs:label "Publications" .
 
-rdf:1 a rdfs:ContainerMembershipProperty ;
+rdf:_1 a rdfs:ContainerMembershipProperty ;
     rdfs:label "1" .
-rdf:2 a rdfs:ContainerMembershipProperty ;
+rdf:_2 a rdfs:ContainerMembershipProperty ;
     rdfs:label "2" .
-rdf:3 a rdfs:ContainerMembershipProperty ;
+rdf:_3 a rdfs:ContainerMembershipProperty ;
     rdfs:label "3" .
