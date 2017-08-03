@@ -99,12 +99,18 @@ ex:Publication2 a ex:publication ;
         ex:AlfredEel .
 
 ex:Mainnav a ex:navigation ;
+    ex:hasContainer ex:MainnavItems .
+
+ex:MainNavItems a rdf:Bag ;
     rdf:_1 ex:group ;
     rdf:_2 ex:project ;
     rdf:_3 ex:publication .
 
 ex:group a foaf:Document ;
     rdfs:label "Groups" ;
+    ex:hasContainer ex:GroupNavItems .
+
+ex:GroupNavItems a rdf:Bag ;
     rdf:_1 ex:Saltwaterbusiness ;
     rdf:_2 ex:Freshwaterbusiness .
 

@@ -9,7 +9,6 @@ layout: default
                 <div class="card-block">
                     <h4 class="card-title">Our Publications</h4>
                     {% assign baseurl = page.rdf | append: "/" | remove_first: page.rdf.page_url %}
-                    {{baseurl}}
                     {% capture query %}
                     SELECT ?publication ?title WHERE{
                         ?publication a ex:publication .

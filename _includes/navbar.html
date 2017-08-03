@@ -4,52 +4,37 @@
         <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
         </li>
-        {% assign count = 0 %}
         {% capture query %}
-        # select all main Navigation position properties for counting
-        SELECT ?position WHERE{
-            ex:Mainnav ?positionProp ?resource .
-            ?positionProp a rdfs:ContainerMembershipProperty .
-            ?positionProp rdfs:label ?position .
+        SELECT ?resource ?label WHERE{
+            ex:MainNavItems ?navProperty ?resource .
+            ?resource rdfs:label ?label .
+            ?navProperty a rdfs:ContainerMembershipProperty .
         }
         {% endcapture %}
-        {% assign resultset = page.rdf | sparql_query: query %}
-        {% for result in resultset %}
-            {% assign count = count | plus : 1 %}
-            {% capture query2 %}
-            # select menu entry for current count
-            SELECT ?resource ?label WHERE{
-                ex:Mainnav ?positionProp ?resource .
-                ?positionProp a rdfs:ContainerMembershipProperty .
-                ?positionProp rdfs:label "{{count}}" .
-                ?resource a foaf:Document .
-                ?resource rdfs:label ?label .
-            }
-            {% endcapture %}
-            {% assign resultset2 = page.rdf | sparql_query: query2 %}
-            {% for result2 in resultset2 %}
-                <li class="nav-item btn-group">
-                    <a class="nav-link" href="{{ result2.resource | remove_first: baseurl }}">
-                        {{ result2.label }}
-                    </a>
-                    {% capture query3 %}
-                    SELECT ?resource ?name WHERE{
-                    <{{ result2.resource }}> ?positionProp ?resource .
-                    ?positionProp a rdfs:ContainerMembershipProperty .
-                    ?resource rdfs:label ?name .
-                    }
-                    {% endcapture %}
-                    {% assign resultset3 = page.rdf | sparql_query: query3 %}
-                    {% if resultset3.size > 0 %}
-                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu">
-                    {% for result3 in resultset3 %}
-                        <a class="dropdown-item" href="{{ result3.resource | remove_first: baseurl }}">{{result3.name}}</a>
-                    {% endfor %}
-                    </div>
-                    {% endif %}
-                </li>
-            {% endfor %}
+        {% assign mainnav = page.rdf | sparql_query: query %}
+        {% for navitem in mainnav %}
+            <li class="nav-item btn-group">
+                <a class="nav-link" href="./../{{ navitem.resource | remove_first: baseurl }}">
+                    {{ navitem.label }}
+                </a>
+                {% capture query2 %}
+                SELECT ?resource ?label WHERE{
+                    <{{navitem.resource}}> ex:hasContainer ?container.
+                    ?container ?navProperty ?resource .
+                    ?resource rdfs:label ?label .
+                    ?navProperty a rdfs:ContainerMembershipProperty .
+                }
+                {% endcapture %}
+                {% assign subnav = page.rdf | sparql_query: query2 %}
+                {% if subnav.size > 0 %}
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu">
+                {% for subnavItem in subnav %}
+                    <a class="dropdown-item" href="./../{{ subnavItem.resource | remove_first: baseurl }}">{{ subnavItem.label }}</a>
+                {% endfor %}
+                </div>
+                {% endif %}
+            </li>
         {% endfor %}
     </ul>
 </nav>
