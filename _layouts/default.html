@@ -2,6 +2,8 @@
 rdf_prefix_path: content.pref
 ---
 <!DOCTYPE html>
+{% assign baseurl = page.rdf | append: "/" | remove_first: page.rdf.page_url %}
+{{site.url}}
 <html>
 
 {% include head.html %}

@@ -28,35 +28,27 @@
             {% endcapture %}
             {% assign resultset2 = page.rdf | sparql_query: query2 %}
             {% for result2 in resultset2 %}
-                {% for page in site.pages %}
-                    {% if page.rdf.iri == result2.resource.iri %}
-                    <li class="nav-item btn-group">
-                        <a class="nav-link" href="{{ page.url }}">
-                            {{ result2.label }}
-                        </a>
-                        {% capture query3 %}
-                        SELECT ?resource ?name WHERE{
-                        <{{ result2.resource }}> ?positionProp ?resource .
-                        ?positionProp a rdfs:ContainerMembershipProperty .
-                        ?resource rdfs:label ?name .
-                        }
-                        {% endcapture %}
-                        {% assign resultset3 = page.rdf | sparql_query: query3 %}
-                        {% if resultset3.size > 0 %}
-                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu">
-                        {% for result3 in resultset3 %}
-                            {% for page2 in site.pages %}
-                                {% if page2.rdf.iri == result3.resource.iri %}
-                                <a class="dropdown-item" href="{{ page2.url }}">{{result3.name}}</a>
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                        </div>
-                        {% endif %}
-                    </li>
+                <li class="nav-item btn-group">
+                    <a class="nav-link" href="{{ result2.resource | remove_first: baseurl }}">
+                        {{ result2.label }}
+                    </a>
+                    {% capture query3 %}
+                    SELECT ?resource ?name WHERE{
+                    <{{ result2.resource }}> ?positionProp ?resource .
+                    ?positionProp a rdfs:ContainerMembershipProperty .
+                    ?resource rdfs:label ?name .
+                    }
+                    {% endcapture %}
+                    {% assign resultset3 = page.rdf | sparql_query: query3 %}
+                    {% if resultset3.size > 0 %}
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu">
+                    {% for result3 in resultset3 %}
+                        <a class="dropdown-item" href="{{ result3.resource | remove_first: baseurl }}">{{result3.name}}</a>
+                    {% endfor %}
+                    </div>
                     {% endif %}
-                {% endfor %}
+                </li>
             {% endfor %}
         {% endfor %}
     </ul>

@@ -9,13 +9,9 @@
         {% endcapture %}
         {% assign resultset = page.rdf | sparql_query: query %}
         {% for result in resultset %}
-        {% for page in site.pages %}
-        {% if page.rdf.iri == result.resource.iri %}
         <li class="nav-item">
-            <a class="nav-link" href="{{page.url}}">{{result.name}}</a>
+            <a class="nav-link" href="{{ result.resource | remove_first: baseurl}}">{{result.name}}</a>
         </li>
-        {% endif %}
-        {% endfor %}
         {% endfor %}
     </ul>
 </nav>

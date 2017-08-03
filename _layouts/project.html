@@ -2,6 +2,7 @@
 rdf_prefix_path: content.pref
 layout: default
 ---
+{% assign baseurl = page.rdf | append: "/" | remove_first: page.rdf.page_url %}
 <div class="container">
     <div class="card">
         <div class="card-block">
@@ -24,13 +25,9 @@ layout: default
                     {% endcapture %}
                     {% assign resultset = page.rdf | sparql_query: query %}
                     {% for result in resultset %}
-                    {% for page in site.pages %}
-                    {% if page.rdf.iri == result.person.iri %}
                     <tr>
-                        <td><a href="{{page.url}}">{{result.name}}</a></td>
+                        <td><a href="{{ result.person | remove_first: baseurl }}">{{result.name}}</a></td>
                     </tr>
-                    {% endif %}
-                    {% endfor %}
                     {% endfor %}
                     </tbody>
                     </table>
@@ -57,11 +54,7 @@ layout: default
                     {% assign resultset = page.rdf | sparql_query: query %}
                     <div class="list-group">
                     {% for result in resultset %}
-                    {% for site in site.pages %}
-                    {% if site.rdf.iri == result.publication.iri %}
-                    <div class="list-group-item"><a href="{{site.url}}">{{ result.title }}</a></div>
-                    {% endif %}
-                    {% endfor %}
+                    <div class="list-group-item"><a href="{{ result.publication | remove_first: baseurl}}">{{ result.title }}</a></div>
                     {% endfor %}
                     </div>
                 </div>

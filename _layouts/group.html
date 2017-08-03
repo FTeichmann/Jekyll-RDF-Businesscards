@@ -2,6 +2,7 @@
 rdf_prefix_path: content.pref
 layout: default
 ---
+{% assign baseurl = page.rdf | append: "/" | remove_first: page.rdf.page_url %}
 <div class="row">
 {% include navleft.html %}
 
@@ -41,11 +42,7 @@ layout: default
                         </div>
                     </div>
                 <div class="team-title">
-                    {% for page in site.pages %}
-                    {% if result.person.iri == page.rdf.iri %}
-                        <h5><a href="{{ page.url }}">{{ result.name }}</a></h5>
-                    {% endif %}
-                    {% endfor %}
+                        <h5><a href="{{ result.person | remove_first: baseurl }}/">{{ result.name }}</a></h5>
                     <span>{{ result.status }}</span>
                 </div>
             </div>

@@ -8,6 +8,8 @@ layout: default
             <div class="col-md-8">
                 <div class="card-block">
                     <h4 class="card-title">Our Publications</h4>
+                    {% assign baseurl = page.rdf | append: "/" | remove_first: page.rdf.page_url %}
+                    {{baseurl}}
                     {% capture query %}
                     SELECT ?publication ?title WHERE{
                         ?publication a ex:publication .
@@ -17,11 +19,7 @@ layout: default
                     {% assign resultset = page.rdf | sparql_query: query %}
                     <div class="list-group">
                         {% for result in resultset %}
-                        {% for site in site.pages %}
-                        {% if site.rdf.iri == result.publication.iri %}
-                        <div class="list-group-item"><a href="{{site.url}}">{{ result.title }}</a></div>
-                        {% endif %}
-                        {% endfor %}
+                        <div class="list-group-item"><a href="{{ result.publication | remove_first: baseurl }}/">{{ result.title }}</a></div>
                         {% endfor %}
                     </div>
                 </div>

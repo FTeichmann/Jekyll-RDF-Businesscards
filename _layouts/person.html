@@ -2,6 +2,7 @@
 rdf_prefix_path: content.pref
 layout: default
 ---
+{% assign baseurl = page.rdf | append: "/" | remove_first: page.rdf.page_url %}
 <div class="row">
 {% include navleft.html %}
 <div class="container">
@@ -79,13 +80,9 @@ layout: default
                     <table class="table table-bordered table-hover">
                     <tbody>
                     {% for result in resultset %}
-                    {% for page in site.pages %}
-                    {% if page.rdf.iri == result.project.iri %}
                     <tr>
-                        <td><a href="{{page.url}}">{{result.projectname}}</a></td>
+                        <td><a href="{{ result.project | remove_first: baseurl }}">{{result.projectname}}</a></td>
                     </tr>
-                    {% endif %}
-                    {% endfor %}
                     {% endfor %}
                     </tbody>
                     </table>
@@ -107,11 +104,7 @@ layout: default
                     <h4 class="card-title">Publications</h4>
                     <div class="list-group">
                     {% for result in resultset %}
-                        {% for page in site.pages %}
-                        {% if page.rdf.iri == result.publication.iri %}
-                        <div class="list-group-item"><a href="{{page.url}}">{{ result.title }}</a></div>
-                        {% endif %}
-                        {% endfor %}
+                        <div class="list-group-item"><a href="{{ result.publication | remove_first: baseurl }}">{{ result.title }}</a></div>
                     {% endfor %}
                     </div>
                 </div>
