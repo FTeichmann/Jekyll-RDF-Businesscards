@@ -7,13 +7,12 @@ Please see https://github.com/Simaris/aksw-to-jekyll-rdf.
 ## Installation
 
 ```
-gem install jekyll
-gem install jekyll-rdf
+bundler install
 ```
 
 
 ## Deploy
 
 ```
-jekyll serve
+JEKYLL_ENV=production bundler exec jekyll serve
 ```
