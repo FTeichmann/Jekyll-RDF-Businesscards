@@ -2,7 +2,7 @@
 rdf_prefix_path: content.pref
 layout: default
 ---
-{% assign baseurl = page.rdf | append: "/" | remove_first: page.rdf.page_url %}
+{% assign baseurl = site.url %}
 <div class="container">
     <div class="card">
         <div class="card-block">
@@ -26,7 +26,7 @@ layout: default
                     {% assign resultset = page.rdf | sparql_query: query %}
                     {% for result in resultset %}
                     <tr>
-                        <td><a href="{{ result.person | remove_first: baseurl }}">{{result.name}}</a></td>
+                        <td><a href="../{{ result.person | remove_first: baseurl }}">{{result.name}}</a></td>
                     </tr>
                     {% endfor %}
                     </tbody>
@@ -54,7 +54,7 @@ layout: default
                     {% assign resultset = page.rdf | sparql_query: query %}
                     <div class="list-group">
                     {% for result in resultset %}
-                    <div class="list-group-item"><a href="{{ result.publication | remove_first: baseurl}}">{{ result.title }}</a></div>
+                    <div class="list-group-item"><a href="../{{ result.publication | remove_first: baseurl}}">{{ result.title }}</a></div>
                     {% endfor %}
                     </div>
                 </div>
