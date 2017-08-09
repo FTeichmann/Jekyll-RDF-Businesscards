@@ -1,4 +1,4 @@
-<nav class="navbar navbar-toggleable-md navbar-light nav-tabs bg-faded site-navigation">
+<nav class="navbar navbar-toggleable-md navbar-light nav-tabs bg-faded site-navigation navigation">
     <img src="http://aksw.org/extensions/site/sites//local/images/logo-aksw.png" width="auto" height="auto" alt="AKSW">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
@@ -28,7 +28,7 @@
                 {% assign subnav = page.rdf | sparql_query: query2 %}
                 {% if subnav.size > 0 %}
                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu ">
                 {% for subnavItem in subnav %}
                     <a class="dropdown-item" href="./../{{ subnavItem.resource | remove_first: baseurl }}">{{ subnavItem.label }}</a>
                 {% endfor %}

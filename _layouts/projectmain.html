@@ -9,6 +9,7 @@ layout: default
             <div class="col-md-8">
                 <div class="card-block">
                     <h4 class="card-title">Our Projects</h4>
+                    <hr>
                     {% capture query %}
                     SELECT ?project ?description WHERE{
                         ?project a ex:project .
@@ -16,11 +17,15 @@ layout: default
                     }
                     {% endcapture %}
                     {% assign resultset = page.rdf | sparql_query: query %}
-                    <div class="list-group">
+                    <table class="table table-bordered table-hover">
+                    <tbody>
                     {% for result in resultset %}
-                        <div class="list-group-item"><a href="../{{ result.project | remove_first: baseurl }}">{{ result.description }}</a></div>
+                    <tr>
+                        <td><a href="../{{ result.project | remove_first: baseurl }}">{{ result.description }}</a></td>
+                    </tr>
                     {% endfor %}
-                    </div>
+                    </tbody>
+                    </table>
                 </div>
             </div>
         </div>
