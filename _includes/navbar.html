@@ -1,40 +1,30 @@
-<nav class="navbar navbar-toggleable-md navbar-light nav-tabs bg-faded site-navigation navigation">
-    <img src="http://aksw.org/extensions/site/sites//local/images/logo-aksw.png" width="auto" height="auto" alt="AKSW">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-        </li>
+<header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="{{ site.baseurl }}/" class="logo">
+      {% if site.logo %}
+      <img src="{{ site.logo | prepend: site.baseurl }}" alt="{{ site.title }}">
+      {% else %}
+      <span>{{ site.title }}</span>
+      {% endif %}
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
         {% capture query %}
         SELECT ?resource ?label WHERE{
             ex:MainNavItems ?navProperty ?resource .
             ?resource rdfs:label ?label .
             ?navProperty a rdfs:ContainerMembershipProperty .
         }
+        ORDER BY ?navProperty
         {% endcapture %}
         {% assign mainnav = page.rdf | sparql_query: query %}
         {% for navitem in mainnav %}
-            <li class="nav-item btn-group">
-                <a class="nav-link" href="./../{{ navitem.resource | remove_first: baseurl }}">
-                    {{ navitem.label }}
-                </a>
-                {% capture query2 %}
-                SELECT ?resource ?label WHERE{
-                    <{{navitem.resource}}> ex:hasContainer ?container.
-                    ?container ?navProperty ?resource .
-                    ?resource rdfs:label ?label .
-                    ?navProperty a rdfs:ContainerMembershipProperty .
-                }
-                {% endcapture %}
-                {% assign subnav = page.rdf | sparql_query: query2 %}
-                {% if subnav.size > 0 %}
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu ">
-                {% for subnavItem in subnav %}
-                    <a class="dropdown-item" href="./../{{ subnavItem.resource | remove_first: baseurl }}">{{ subnavItem.label }}</a>
-                {% endfor %}
-                </div>
-                {% endif %}
-            </li>
+          <li class="nav-link"><a href="/{{ navitem.resource | remove_first: baseurl }}">{{ navitem.label }}</a>
         {% endfor %}
-    </ul>
-</nav>
+      </ul>
+    </nav>
+  </div>
+</header>

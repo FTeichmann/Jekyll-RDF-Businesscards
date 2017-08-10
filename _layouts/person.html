@@ -3,68 +3,62 @@ rdf_prefix_path: content.pref
 layout: default
 ---
 {% assign baseurl = site.url %}
-<div class="row">
-{% include navleft.html %}
-<div class="container">
-    <div class="card">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card-block">
-                    <h4 class="card-title">{{ page.rdf | rdf_property: 'foaf:name' }}</h4>
-                    <table class="table table-bordered table-hover">
-                    <tbody>
-                        {% assign title = page.rdf | rdf_property: 'foaf:title' %}
-                        {% if title %}
-                        <tr>
-                            <td>Title</td>
-                            <td>{{ title }}</td>
-                        </tr>
-                        {% endif %}
-                        {% assign firstname = page.rdf | rdf_property: 'foaf:firstName' %}
-                        {% if firstname %}
-                        <tr>
-                            <td>First Name</td>
-                            <td>{{ firstname }}</td>
-                        </tr>
-                        {% endif %}
-                        {% assign familyname = page.rdf | rdf_property: 'foaf:familyName' %}
-                        {% if familyname %}
-                        <tr>
-                            <td>Family Name</td>
-                            <td>{{ familyname }}</td>
-                        </tr>
-                        {% endif %}
-                        {% assign phone = page.rdf | rdf_property: 'foaf:phone' %}
-                        {% if phone %}
-                        <tr>
-                            <td>Phone</td>
-                            <td><a href="{{ phone }}">{{ phone }}</td>
-                        </tr>
-                        {% endif %}
-                        {% assign mbox  = page.rdf | rdf_property: 'foaf:mbox' %}
-                        {% if mbox %}
-                        <tr>
-                            <td>Email</td>
-                            <td><a href="{{ mbox }}">{{ mbox }}</td>
-                        </tr>
-                        {% endif %}
-                        {% assign room = page.rdf | rdf_property: 'ex:room' %}
-                        {% if room %}
-                        <tr>
-                            <td>Room</td>
-                            <td>{{ room }}</td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card-block">
-                    <img class="rounded float-left img-fluid" src="{{ page.rdf | rdf_property: 'foaf:depiction'}}" alt="Photo" style="padding: 0px; height: auto; max-width: 100%;">
-                </div>
-            </div>
-        </div>
+<div class="wrapper">
+<div class="page">
+
+    {% include navleft.html %}
+
+    <h2>{{ page.rdf | rdf_property: 'foaf:name' }}</h2>
+
+    <img class="profile" src="{{ page.rdf | rdf_property: 'foaf:depiction'}}" alt="Photo">
+
+        <table>
+        <tbody>
+            {% assign title = page.rdf | rdf_property: 'foaf:title' %}
+            {% if title %}
+            <tr>
+                <td>Title</td>
+                <td>{{ title }}</td>
+            </tr>
+            {% endif %}
+            {% assign firstname = page.rdf | rdf_property: 'foaf:firstName' %}
+            {% if firstname %}
+            <tr>
+                <td>First Name</td>
+                <td>{{ firstname }}</td>
+            </tr>
+            {% endif %}
+            {% assign familyname = page.rdf | rdf_property: 'foaf:familyName' %}
+            {% if familyname %}
+            <tr>
+                <td>Family Name</td>
+                <td>{{ familyname }}</td>
+            </tr>
+            {% endif %}
+            {% assign phone = page.rdf | rdf_property: 'foaf:phone' %}
+            {% if phone %}
+            <tr>
+                <td>Phone</td>
+                <td><a href="{{ phone }}">{{ phone }}</td>
+            </tr>
+            {% endif %}
+            {% assign mbox  = page.rdf | rdf_property: 'foaf:mbox' %}
+            {% if mbox %}
+            <tr>
+                <td>Email</td>
+                <td><a href="{{ mbox }}">{{ mbox }}</td>
+            </tr>
+            {% endif %}
+            {% assign room = page.rdf | rdf_property: 'ex:room' %}
+            {% if room %}
+            <tr>
+                <td>Room</td>
+                <td>{{ room }}</td>
+            </tr>
+            {% endif %}
+        </tbody>
+        </table>
+
         {% capture query %}
         SELECT ?project ?projectname WHERE{
             <{{page.rdf}}> ex:project ?project .
@@ -115,6 +109,5 @@ layout: default
             </div>
         </div>
         {% endif %}
-    </div>
 </div>
 </div>

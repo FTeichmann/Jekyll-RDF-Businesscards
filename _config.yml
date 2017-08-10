@@ -1,10 +1,11 @@
 
 # Site settings
 url: http://example.org/
+baseurl: ""
 title: Your awesome title
 email: your-email@domain.com
 description: jekyll-rdf businesscards
-baseurl: ""
+logo: "http://aksw.org/extensions/site/sites//local/images/logo-aksw.png"
 
 # Build settings
 markdown: kramdown

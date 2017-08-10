@@ -4,7 +4,8 @@
 @prefix ex: <http://example.org/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-<http://example.org/> a foaf:Document .
+<http://example.org/> a foaf:Document ;
+                      rdfs:label "Home" .
 
 ex:OliverOctopus a foaf:Person ;
     foaf:name "Oliver Octopus" ;
@@ -102,9 +103,10 @@ ex:Mainnav a ex:navigation ;
     ex:hasContainer ex:MainnavItems .
 
 ex:MainNavItems a rdf:Bag ;
-    rdf:_1 ex:group ;
-    rdf:_2 ex:project ;
-    rdf:_3 ex:publication .
+    rdf:_1 <http://example.org/> ;
+    rdf:_2 ex:group ;
+    rdf:_3 ex:project ;
+    rdf:_4 ex:publication .
 
 ex:group a foaf:Document ;
     rdfs:label "Groups" ;
@@ -126,3 +128,5 @@ rdf:_2 a rdfs:ContainerMembershipProperty ;
     rdfs:label "2" .
 rdf:_3 a rdfs:ContainerMembershipProperty ;
     rdfs:label "3" .
+rdf:_4 a rdfs:ContainerMembershipProperty ;
+    rdfs:label "4" .
