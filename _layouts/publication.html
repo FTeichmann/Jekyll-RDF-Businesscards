@@ -3,19 +3,12 @@ rdf_prefix_path: content.pref
 layout: default
 ---
 {% assign baseurl = site.url %}
-<div class="container">
-    <div class="card">
-        <div class="card-block">
-        <div class="heading-title text-center">
-            <h3 class="text-uppercase">{{ page.rdf | rdf_property: 'dc:title' }}</h3>
-            <p class="p-top-30 half-txt">a publication</p>
+<div class="wrapper">
+<div class="page">
+            <h2 style="text-align: center">{{ page.rdf | rdf_property: 'dc:title' }}</h2>
+            <p class="half-txt">a publication</p>
             <hr>
-        </div>
-        </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card-block">
-                <h4 class="card-title">Authors</h4>
+                <h4>Authors</h4>
                 <table class="table table-bordered table-hover">
                 <tbody>
                 {% capture query %}
@@ -32,14 +25,8 @@ layout: default
                 {% endfor %}
                 </tbody>
                 </table>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card-block">
-                <h4 class="card-title">Abstract</h4>
+                <h4>Abstract</h4>
                 <p> {{ page.rdf | rdf_property: 'ex:longdescription' }}
-            </div>
-        </div>
-    </div>
+
     </div>
 </div>

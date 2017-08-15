@@ -3,18 +3,19 @@ rdf_prefix_path: content.pref
 layout: default
 ---
 {% assign baseurl = site.url %}
+
 <div class="wrapper">
-<div class="page">
-    <h2>Our Projects</h4>
-    {% include page_divider.html %}
-    {% capture query %}
-    SELECT ?project ?description WHERE{
-        ?project a ex:project .
-        ?project ex:description ?description .
-    }
-    {% endcapture %}
-    {% assign resultset = page.rdf | sparql_query: query %}
-    <table class="table table-bordered table-hover">
+    <div class="page">
+<h2 style="text-align: center">Our Projects</h2>
+{% include page_divider.html %}
+{% capture query %}
+SELECT ?project ?description WHERE{
+    ?project a ex:project .
+    ?project ex:description ?description .
+}
+{% endcapture %}
+{% assign resultset = page.rdf | sparql_query: query %}
+<table class="table table-bordered table-hover">
     <tbody>
     {% for result in resultset %}
     <tr>
@@ -22,6 +23,6 @@ layout: default
     </tr>
     {% endfor %}
     </tbody>
-    </table>
+</table>
 </div>
 </div>

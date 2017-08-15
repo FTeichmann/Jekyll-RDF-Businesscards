@@ -3,16 +3,13 @@ rdf_prefix_path: content.pref
 layout: default
 ---
 {% assign baseurl = site.url %}
-<div class="row">
-{% include navleft.html %}
 
-    <div class="container">
-        <div class="heading-title text-center">
-            <h3 class="text-uppercase">Meet the Team</h3>
-            <p class="p-top-30 half-txt">Let's meet our {{ page.rdf | rdf_property: 'rdfs:label'}} team!</p>
-            <hr>
-        </div>
-        <div class="row">
+<div class="wrapper">
+    <div class="page">
+            <h2 style="text-align: center">Meet the Team</h2>
+            {% include page_divider.html %}
+            <p class="p-bot-30 half-txt">Let's meet our {{ page.rdf | rdf_property: 'rdfs:label'}} team!</p>
+            <div class="row">
             {% capture query %}
             SELECT DISTINCT ?person ?name ?title ?firstName ?familyName ?phone ?mbox ?status ?depiction WHERE{
                 ?person a foaf:Person ;
@@ -36,9 +33,8 @@ layout: default
                     </div>
                     <div class="team-hover">
                         <div class="desk">
-                            <h4>{{ result.title }} {{ result.firstName }} {{ result.familyName }}</h4>
                             <p><a href="{{ result.phone }}">{{ result.phone }}</a></p>
-                            <p><a href="{{ result.mbox }}">{{ result.mbox }}</p>
+                            <p><a href="{{ result.mbox }}">mail to</p>
                             </div>
                         </div>
                     </div>
@@ -49,5 +45,5 @@ layout: default
             </div>
             {% endfor %}
         </div>
-    </div>
+</div>
 </div>

@@ -3,31 +3,25 @@ rdf_prefix_path: content.pref
 layout: default
 ---
 {% assign baseurl = site.url %}
-<div class="container">
-    <div class="card">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card-block">
-                    <h4 class="card-title">Our Publications</h4>
-                    <hr>
-                    {% capture query %}
-                    SELECT ?publication ?title WHERE{
-                        ?publication a ex:publication .
-                        ?publication dc:title ?title .
-                    }
-                    {% endcapture %}
-                    {% assign resultset = page.rdf | sparql_query: query %}
-                    <table class="table table-bordered table-hover">
-                    <tbody>
-                    {% for result in resultset %}
-                    <tr>
-                        <td><a href="../{{ result.publication | remove_first: baseurl }}">{{ result.title }}</a></td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+<div class="wrapper">
+    <div class="page">
+        <h2 style="text-align: center">Our Publications</h2>
+        <hr>
+        {% capture query %}
+        SELECT ?publication ?title WHERE{
+            ?publication a ex:publication .
+            ?publication dc:title ?title .
+        }
+        {% endcapture %}
+        {% assign resultset = page.rdf | sparql_query: query %}
+        <table class="table table-bordered table-hover">
+            <tbody>
+                {% for result in resultset %}
+                <tr>
+                    <td><a href="../{{ result.publication | remove_first: baseurl }}">{{ result.title }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>

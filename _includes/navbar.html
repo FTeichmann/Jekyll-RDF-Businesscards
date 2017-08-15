@@ -22,7 +22,25 @@
         {% endcapture %}
         {% assign mainnav = page.rdf | sparql_query: query %}
         {% for navitem in mainnav %}
-          <li class="nav-link"><a href="/{{ navitem.resource | remove_first: baseurl }}">{{ navitem.label }}</a>
+            <li class="nav-link"><a href="/{{ navitem.resource | remove_first: baseurl }}">{{ navitem.label }}</a>
+            <!-- {% capture query2 %}
+            SELECT ?resource ?label WHERE{
+                <{{navitem.resource}}> ex:hasContainer ?container.
+                ?container ?navProperty ?resource .
+                ?resource rdfs:label ?label .
+                ?navProperty a rdfs:ContainerMembershipProperty .
+            }
+            {% endcapture %}
+            {% assign subnav = page.rdf | sparql_query: query2 %}
+            {% if subnav.size > 0 %}
+            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown">
+            {% for subnavItem in subnav %}
+                <a class="dropdown-item" href="/{{ subnavItem.resource | remove_first: baseurl }}">{{ subnavItem.label }}</a>
+            {% endfor %}
+            </div>
+            {% endif %}
+            </li> -->
         {% endfor %}
       </ul>
     </nav>

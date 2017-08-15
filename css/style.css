@@ -5,19 +5,8 @@
 footer {
   margin-top: 10px;
 }
-.heading-title {
-    margin-bottom: 100px;
-}
-.text-center {
-    text-align: center;
-}
-.heading-title h3 {
-    margin-bottom: 0;
-    letter-spacing: 2px;
-    font-weight: normal;
-}
-.p-top-30 {
-    padding-top: 30px;
+.p-bot-30 {
+    padding-bottom: 30px;
 }
 .half-txt {
     width: 60%;
@@ -26,10 +15,6 @@ footer {
     line-height: 25px;
     color: #7e7e7e;
 }
-.text-uppercase {
-    text-transform: uppercase;
-}
-
 .team-member, .team-member .team-img {
     position: relative;
 }
@@ -39,7 +24,6 @@ footer {
 .team-member, .team-member .team-img {
     position: relative;
 }
-
 .team-hover {
     position: absolute;
     top: 0;
