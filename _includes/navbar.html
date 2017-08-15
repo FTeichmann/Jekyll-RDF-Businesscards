@@ -34,11 +34,11 @@
             {% assign subnav = page.rdf | sparql_query: query2 %}
             {% if subnav.size > 0 %}
             <li class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></li>
-            <div class="dropdown-menu" style="">
+            <li class="dropdown-menu navigation-menu" style="position: absolute; right: 0px;">
             {% for subnavItem in subnav %}
-                <a class="nav-link" href="/{{ subnavItem.resource | remove_first: baseurl }}">{{ subnavItem.label }}</a>
+                <a class="nav-link" style="text-align:right" href="/{{ subnavItem.resource | remove_first: baseurl }}">{{ subnavItem.label }}</a>
             {% endfor %}
-            </div>
+            </li>
             {% endif %}
         {% endfor %}
       </ul>
