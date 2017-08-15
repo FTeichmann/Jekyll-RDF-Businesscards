@@ -4,13 +4,13 @@ layout: default
 ---
 {% assign baseurl = site.url %}
 <div class="wrapper">
-<div class="page">
-            <h2 style="text-align: center">{{ page.rdf | rdf_property: 'dc:title' }}</h2>
-            <p class="half-txt">a publication</p>
-            <hr>
-                <h4>Authors</h4>
-                <table class="table table-bordered table-hover">
-                <tbody>
+    <div class="page">
+        <h2 style="text-align: center">{{ page.rdf | rdf_property: 'dc:title' }}</h2>
+        <p class="p-bot-30 half-txt">a publication</p>
+        {% include page_divider.html %}
+        <h4>Authors</h4>
+        <table class="table table-bordered table-hover">
+            <tbody>
                 {% capture query %}
                 SELECT ?person ?name WHERE{
                     <{{page.rdf}}> dc:author ?person .
@@ -23,10 +23,9 @@ layout: default
                     <td><a href="../{{ result.person | remove_first: baseurl }}">{{result.name}}</a></td>
                 </tr>
                 {% endfor %}
-                </tbody>
-                </table>
-                <h4>Abstract</h4>
-                <p> {{ page.rdf | rdf_property: 'ex:longdescription' }}
-
+            </tbody>
+        </table>
+        <h4 style="text-align: center">Abstract</h4>
+        <p> {{ page.rdf | rdf_property: 'ex:longdescription' }}
     </div>
 </div>

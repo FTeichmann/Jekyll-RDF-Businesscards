@@ -4,52 +4,51 @@ layout: default
 ---
 {% assign baseurl = site.url %}
 <div class="wrapper">
-<div class="page">
-                <h2 style="text-align: center">{{ page.rdf | rdf_property: 'rdfs:label' }}</h2>
-                <p class="half-txt">{{ page.rdf | rdf_property: 'ex:description'}}</p>
-                <hr>
+    <div class="page">
+        <h2 style="text-align: center">{{ page.rdf | rdf_property: 'rdfs:label' }}</h2>
+        <p class="p-bot-30 half-txt">{{ page.rdf | rdf_property: 'ex:description'}}</p>
+        {% include page_divider.html %}
 
-                    <h4>Project Member</h4>
-                    <table class="table table-bordered table-hover">
-                    <tbody>
-                    {% capture query %}
-                    SELECT ?person ?name WHERE{
-                        ?person ex:project <{{page.rdf}}> .
-                        ?person foaf:name ?name .
-                    }
-                    {% endcapture %}
-                    {% assign resultset = page.rdf | sparql_query: query %}
-                    {% for result in resultset %}
-                    <tr>
-                        <td><a href="../{{ result.person | remove_first: baseurl }}">{{result.name}}</a></td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                    </table>
+        <h4>Project Member</h4>
+        <table class="table table-bordered table-hover">
+            <tbody>
+                {% capture query %}
+                SELECT ?person ?name WHERE{
+                    ?person ex:project <{{page.rdf}}> .
+                    ?person foaf:name ?name .
+                }
+                {% endcapture %}
+                {% assign resultset = page.rdf | sparql_query: query %}
+                {% for result in resultset %}
+                <tr>
+                    <td><a href="../{{ result.person | remove_first: baseurl }}">{{result.name}}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
+        <h4 style="text-align: center">Project Description</h4>
+        <p> {{ page.rdf | rdf_property: 'ex:longdescription' }}
 
-                    <h4 class="card-title">Project Description</h4>
-                    <p> {{ page.rdf | rdf_property: 'ex:longdescription' }}
-
-                    <h4 >Publications</h4>
-                    {% capture query %}
-                    SELECT DISTINCT ?publication ?title WHERE{
-                        ?publication dc:author ?author .
-                        ?author ex:project <{{page.rdf}}> .
-                        ?publication dc:title ?title .
-                    }
-                    {% endcapture %}
-                    {% assign resultset = page.rdf | sparql_query: query %}
-                    <table class="table table-bordered table-hover">
-                    <tbody>
+            <h4 >Publications</h4>
+            {% capture query %}
+            SELECT DISTINCT ?publication ?title WHERE{
+                ?publication dc:author ?author .
+                ?author ex:project <{{page.rdf}}> .
+                ?publication dc:title ?title .
+            }
+            {% endcapture %}
+            {% assign resultset = page.rdf | sparql_query: query %}
+            <table class="table table-bordered table-hover">
+                <tbody>
                     {% for result in resultset %}
                     <tr>
                         <td><a href="../{{ result.publication | remove_first: baseurl }}">{{ result.title }}</a></td>
                     </tr>
                     {% endfor %}
-                    </tbody>
-                    </table>
-                </div>
-            </div>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 </div>

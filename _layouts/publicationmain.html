@@ -6,7 +6,7 @@ layout: default
 <div class="wrapper">
     <div class="page">
         <h2 style="text-align: center">Our Publications</h2>
-        <hr>
+        {% include page_divider.html %}
         {% capture query %}
         SELECT ?publication ?title WHERE{
             ?publication a ex:publication .

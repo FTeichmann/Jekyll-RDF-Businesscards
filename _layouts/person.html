@@ -4,60 +4,56 @@ layout: default
 ---
 {% assign baseurl = site.url %}
 <div class="wrapper">
-<div class="page">
+    <div class="page">
+        <h2 style="text-align: center">{{ page.rdf | rdf_property: 'foaf:name' }}</h2>
+        <img class="profile" src="{{ page.rdf | rdf_property: 'foaf:depiction'}}" alt="Photo">
 
-
-    <h2 style="text-align: center">{{ page.rdf | rdf_property: 'foaf:name' }}</h2>
-
-    <img class="profile" src="{{ page.rdf | rdf_property: 'foaf:depiction'}}" alt="Photo">
-
-        <table>
-        <tbody>
-            {% assign title = page.rdf | rdf_property: 'foaf:title' %}
-            {% if title %}
-            <tr>
-                <td>Title</td>
-                <td>{{ title }}</td>
-            </tr>
-            {% endif %}
-            {% assign firstname = page.rdf | rdf_property: 'foaf:firstName' %}
-            {% if firstname %}
-            <tr>
-                <td>First Name</td>
-                <td>{{ firstname }}</td>
-            </tr>
-            {% endif %}
-            {% assign familyname = page.rdf | rdf_property: 'foaf:familyName' %}
-            {% if familyname %}
-            <tr>
-                <td>Family Name</td>
-                <td>{{ familyname }}</td>
-            </tr>
-            {% endif %}
-            {% assign phone = page.rdf | rdf_property: 'foaf:phone' %}
-            {% if phone %}
-            <tr>
-                <td>Phone</td>
-                <td><a href="{{ phone }}">{{ phone }}</td>
-            </tr>
-            {% endif %}
-            {% assign mbox  = page.rdf | rdf_property: 'foaf:mbox' %}
-            {% if mbox %}
-            <tr>
-                <td>Email</td>
-                <td><a href="{{ mbox }}">{{ mbox }}</td>
-            </tr>
-            {% endif %}
-            {% assign room = page.rdf | rdf_property: 'ex:room' %}
-            {% if room %}
-            <tr>
-                <td>Room</td>
-                <td>{{ room }}</td>
-            </tr>
-            {% endif %}
-        </tbody>
+        <table class="table table-bordered table-hover">
+            <tbody>
+                {% assign title = page.rdf | rdf_property: 'foaf:title' %}
+                {% if title %}
+                <tr>
+                    <td>Title</td>
+                    <td>{{ title }}</td>
+                </tr>
+                {% endif %}
+                {% assign firstname = page.rdf | rdf_property: 'foaf:firstName' %}
+                {% if firstname %}
+                <tr>
+                    <td>First Name</td>
+                    <td>{{ firstname }}</td>
+                </tr>
+                {% endif %}
+                {% assign familyname = page.rdf | rdf_property: 'foaf:familyName' %}
+                {% if familyname %}
+                <tr>
+                    <td>Family Name</td>
+                    <td>{{ familyname }}</td>
+                </tr>
+                {% endif %}
+                {% assign phone = page.rdf | rdf_property: 'foaf:phone' %}
+                {% if phone %}
+                <tr>
+                    <td>Phone</td>
+                    <td><a href="{{ phone }}">{{ phone }}</td>
+                </tr>
+                {% endif %}
+                {% assign mbox  = page.rdf | rdf_property: 'foaf:mbox' %}
+                {% if mbox %}
+                <tr>
+                    <td>Email</td>
+                    <td><a href="{{ mbox }}">{{ mbox }}</td>
+                </tr>
+                {% endif %}
+                {% assign room = page.rdf | rdf_property: 'ex:room' %}
+                {% if room %}
+                <tr>
+                    <td>Room</td>
+                    <td>{{ room }}</td>
+                </tr>
+                {% endif %}
+            </tbody>
         </table>
-
         {% capture query %}
         SELECT ?project ?projectname WHERE{
             <{{page.rdf}}> ex:project ?project .
@@ -66,16 +62,16 @@ layout: default
         {% endcapture %}
         {% assign resultset = page.rdf | sparql_query: query %}
         {% if resultset.size > 0 %}
-                    <h4 style="text-align: center">Current Projects</h4>
-                    <table class="table table-bordered table-hover">
-                    <tbody>
-                    {% for result in resultset %}
-                    <tr>
-                        <td><a href="../{{ result.project | remove_first: baseurl }}">{{result.projectname}}</a></td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                    </table>
+        <h4 style="text-align: center">Current Projects</h4>
+        <table class="table table-bordered table-hover">
+            <tbody>
+                {% for result in resultset %}
+                <tr>
+                    <td><a href="../{{ result.project | remove_first: baseurl }}">{{result.projectname}}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         {% endif %}
         {% capture query %}
         SELECT ?publication ?title WHERE{
@@ -85,16 +81,16 @@ layout: default
         {% endcapture %}
         {% assign resultset = page.rdf | sparql_query: query %}
         {% if resultset.size > 0 %}
-                    <h4 style="text-align: center">Publications</h4>
-                    <table class="table table-bordered table-hover">
-                    <tbody>
-                    {% for result in resultset %}
-                    <tr>
-                        <td><a href="../{{ result.publication | remove_first: baseurl }}">{{ result.title }}</a></td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                    </table>
+        <h4 style="text-align: center">Publications</h4>
+        <table class="table table-bordered table-hover">
+            <tbody>
+                {% for result in resultset %}
+                <tr>
+                    <td><a href="../{{ result.publication | remove_first: baseurl }}">{{ result.title }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         {% endif %}
-</div>
+    </div>
 </div>

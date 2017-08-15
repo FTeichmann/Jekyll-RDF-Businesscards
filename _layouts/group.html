@@ -3,22 +3,21 @@ rdf_prefix_path: content.pref
 layout: default
 ---
 {% assign baseurl = site.url %}
-
 <div class="wrapper">
     <div class="page">
-            <h2 style="text-align: center">Meet the Team</h2>
-            {% include page_divider.html %}
-            <p class="p-bot-30 half-txt">Let's meet our {{ page.rdf | rdf_property: 'rdfs:label'}} team!</p>
-            <div class="row">
+        <h2 style="text-align: center">Meet the Team</h2>
+        {% include page_divider.html %}
+        <p class="p-bot-30 half-txt">Let's meet our {{ page.rdf | rdf_property: 'rdfs:label'}} team!</p>
+        <div class="row">
             {% capture query %}
-            SELECT DISTINCT ?person ?name ?title ?firstName ?familyName ?phone ?mbox ?status ?depiction WHERE{
+            SELECT DISTINCT ?person ?name ?title ?firstName ?familyName ?phone ?mbox ?position ?depiction WHERE{
                 ?person a foaf:Person ;
                 foaf:name ?name ;
                 ex:group <{{ page.rdf.iri }}> .
                 OPTIONAL { ?person foaf:familyName ?familyName }
                 OPTIONAL { ?person foaf:firstName ?firstName }
                 OPTIONAL { ?person foaf:title ?title }
-                OPTIONAL { ?person foaf:status ?status }
+                OPTIONAL { ?person foaf:status ?position }
                 OPTIONAL { ?person foaf:depiction ?depiction }
                 OPTIONAL { ?person foaf:mbox ?mbox }
                 OPTIONAL { ?person foaf:phone ?phone }
@@ -35,15 +34,15 @@ layout: default
                         <div class="desk">
                             <p><a href="{{ result.phone }}">{{ result.phone }}</a></p>
                             <p><a href="{{ result.mbox }}">mail to</p>
-                            </div>
                         </div>
                     </div>
+                </div>
                 <div class="team-title">
-                        <h5><a href="../{{ result.person | remove_first: baseurl }}/">{{ result.name }}</a></h5>
-                    <span>{{ result.status }}</span>
+                        <h5><a href="/{{ result.person | remove_first: baseurl }}/">{{ result.name }}</a></h5>
+                    <span>{{ result.position }}</span>
                 </div>
             </div>
             {% endfor %}
         </div>
-</div>
+    </div>
 </div>
